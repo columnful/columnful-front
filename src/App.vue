@@ -4,8 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/reviews">Reviews</router-link> |
-      <router-link :to="{name: Signup}">Signup</router-link> |
-      <router-link :to="{name: Login}">Login</router-link>
+      <router-link :to="{name: 'Signup'}">Signup</router-link> |
+      <router-link :to="{name: 'Login'}">Login</router-link>
     </div>
     <router-view/>
   </div>

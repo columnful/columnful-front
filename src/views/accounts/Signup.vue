@@ -27,7 +27,7 @@ export default {
       credentials: {
         username: '',
         password: '',
-        passwrodConfirm: '',
+        passwordConfirm: '',
       },
       error: false,
     }
