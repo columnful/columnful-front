@@ -4,12 +4,46 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/reviews">Reviews</router-link> |
-      <router-link :to="{name: 'Signup'}">Signup</router-link> |
-      <router-link :to="{name: 'Login'}">Login</router-link>
+      <span v-if="isLogin">
+        <router-link @click.native="logout" to="#">Logout</router-link>
+      </span>
+      <span v-else>
+        <router-link :to="{name: 'Signup'}">Signup</router-link> |
+        <router-link :to="{name: 'Login'}">Login</router-link>
+      </span>
     </div>
-    <router-view/>
+    <router-view @login="isLogin=true"/>
   </div>
 </template>
+
+<script>
+
+export default {
+  name: 'App',
+  data: function () {
+    return {
+      isLogin: false,
+    }
+  },
+  created: function () {
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      this.isLogin = true
+    }
+  },
+  
+  methods: {
+    logout: function () {
+      this.lsLogin = false
+      localStorage.removeItem('jwt')
+      this.$router.push({ name: 'Login' })
+    }
+  },
+}
+
+</script>
+
+
 
 <style>
 #app {

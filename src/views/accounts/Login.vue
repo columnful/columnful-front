@@ -49,6 +49,7 @@ export default {
           this.newAlert()
         })
     },
+
     newAlert: function () {
       this.$fire({
         title: "아이디나 비밀번호를 확인해주세요.",
