@@ -14,6 +14,13 @@ export default {
   components: {
     ReviewList,
   },
+  created: function () {
+    if (localStorage.getItem('jwt')) {
+      console.log('hi')
+    } else {
+      this.$router.push({ name: 'Login' })
+    }
+  },
 
 
 }

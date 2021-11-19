@@ -34,7 +34,7 @@ export default {
   
   methods: {
     logout: function () {
-      this.lsLogin = false
+      this.isLogin = false
       localStorage.removeItem('jwt')
       this.$router.push({ name: 'Login' })
     }
