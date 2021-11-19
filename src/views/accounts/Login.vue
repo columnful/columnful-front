@@ -38,8 +38,10 @@ export default {
       axios.post('http://127.0.0.1:8000/accounts/api-token-auth/', this.credentials,)
         .then((res) => {
           const username = res.config.data.split('"')[3]
+          console.log(res.data.token)
           localStorage.setItem('jwt', res.data.token)
           localStorage.setItem('username', username)
+          console.log(localStorage)
           
           this.$emit('login')
           this.$router.push({ name: 'Home' })
