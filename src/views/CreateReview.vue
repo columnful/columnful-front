@@ -30,11 +30,6 @@ export default {
       title: '',
     }
   },
-  // computed: {
-  //   category: function () {
-  //     return this.$route.params.category
-  //   },
-  // },
   methods: {
     setToken: function () {
       const token = localStorage.getItem('jwt')

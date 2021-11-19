@@ -37,10 +37,10 @@ export default {
     login: function () {
       axios.post('http://127.0.0.1:8000/accounts/api-token-auth/', this.credentials,)
         .then((res) => {
-          const username = res.config.data.split('"')[3]
+          // const username = res.config.data.split('"')[3]
           console.log(res.data.token)
           localStorage.setItem('jwt', res.data.token)
-          localStorage.setItem('username', username)
+          // localStorage.setItem('username', username)
           console.log(localStorage)
           
           this.$emit('login')

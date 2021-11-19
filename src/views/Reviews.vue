@@ -14,20 +14,20 @@
         <!-- @row-clicked="myRowClickHandler" -->
       </div>
     <router-link to="/reviews/create/">Create</router-link>
-    <review-list>
-    </review-list>
+    <!-- <review-list>
+    </review-list> -->
   </div>
 </template>
 
 <script>
 import axios from'axios'
-import ReviewList from '@/components/ReviewList'
+// import ReviewList from '@/components/ReviewList'
 
 export default {
   name: 'Reviews',
-  components: {
-    ReviewList,
-  },
+  // components: {
+  //   ReviewList,
+  // },
   data: function () {
     return {
       perPage: 10,
@@ -51,16 +51,29 @@ export default {
       contentDetail: '',
     }
   },
-  getReviews: function () {
-      const config = this.setToken()
-      axios.get(`http://127.0.0.1:8000/reviews/create`, config)
-        .then((res) => {
-          this.reviews = res.data
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+  methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        headers: {
+          Authorization: `JWT ${token}`
+        }
+      }
+      return config
     },
+
+    getReviews: function () {
+        const config = this.setToken()
+        axios.get(`http://127.0.0.1:8000/reviews/create`, config)
+          .then((res) => {
+            this.reviews = res.data
+            console.log('jwt')
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      },
+  },
   created: function () {
     if (localStorage.getItem('jwt')) {
       console.log('hi')
