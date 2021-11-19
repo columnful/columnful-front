@@ -41,7 +41,7 @@ export default {
     getReviews: function () {
       axios({
         method:'get',
-        url: 'http://127.0.0.1:8000/reviews/',
+        url: 'http://127.0.0.1:8000/reviews/reviews/',
         headers:this.setToken()
       })
         .then(res => {

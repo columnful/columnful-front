@@ -50,7 +50,7 @@ export default {
         title: this.title,
       }
       if (ReviewItem.title) {
-        axios.post(`http://127.0.0.1:8000/reviews/create/`, ReviewItem, config)
+        axios.post(`http://127.0.0.1:8000/reviews/reviews/`, ReviewItem, config)
         // axios({
         //   method: 'post',
         //   url: 'http://127.0.0.1:8000/reviews/create/',

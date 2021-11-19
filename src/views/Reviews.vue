@@ -14,20 +14,20 @@
         <!-- @row-clicked="myRowClickHandler" -->
       </div>
     <router-link to="/reviews/create/">Create</router-link>
-    <!-- <review-list>
-    </review-list> -->
+    <review-list>
+    </review-list>
   </div>
 </template>
 
 <script>
 import axios from'axios'
-// import ReviewList from '@/components/ReviewList'
+import ReviewList from '@/components/ReviewList'
 
 export default {
   name: 'Reviews',
-  // components: {
-  //   ReviewList,
-  // },
+  components: {
+    ReviewList,
+  },
   data: function () {
     return {
       perPage: 10,
