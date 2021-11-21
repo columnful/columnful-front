@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>나의 비평</b>
+    <b>비평 목록</b>
     <div>
       <my-review-list-item>
       </my-review-list-item>

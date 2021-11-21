@@ -8,6 +8,7 @@ import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import Profile from '@/views/Profile'
 import CreateReview from '@/views/CreateReview'
+import ReviewDetail from '@/views/ReviewDetail'
 
 Vue.use(VueRouter)
 
@@ -51,7 +52,12 @@ const routes = [
     path: '/reviews/create',
     name: 'CreateReview',
     component: CreateReview,
-  }
+  },
+  {
+    path: `/reviews/reviews/${ReviewDetail.reviewId}`,
+    name: 'ReviewDetail',
+    component: ReviewDetail,
+  },
 
 ]
 

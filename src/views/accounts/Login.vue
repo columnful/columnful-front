@@ -37,11 +37,10 @@ export default {
     login: function () {
       axios.post('http://127.0.0.1:8000/accounts/api-token-auth/', this.credentials,)
         .then((res) => {
-          // const username = res.config.data.split('"')[3]
-          console.log(res.data.token)
+          // username을 localStorage에 저장하여 profile에서 사용하기 위함임
+          const username = res.config.data.split('"')[3]
           localStorage.setItem('jwt', res.data.token)
-          // localStorage.setItem('username', username)
-          console.log(localStorage)
+          localStorage.setItem('username', username)
           
           this.$emit('login')
           this.$router.push({ name: 'Home' })

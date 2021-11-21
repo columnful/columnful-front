@@ -3,8 +3,12 @@
     <body
       v-for="review in reviews"
       :key="review.id"
-      :review="review">
-      {{ review.title }}
+      :review="review"
+      >
+        <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
+          번호 : <b>{{ review.id }}</b> |
+          제목 : <b>{{ review.title }}</b>
+        </router-link>
     </body>
   </div>
 </template>
@@ -45,7 +49,6 @@ export default {
         headers:this.setToken()
       })
         .then(res => {
-          console.log(res)
           this.reviews = res.data
         })
         .catch(err => {

@@ -1,18 +1,26 @@
 <template>
   <div>
-    비평가 <b>{{ getUsername() }}</b>
+    비평가 <b>{{ username }}</b>
   </div>
 </template>
 
 <script>
 export default {
   name: 'UserProfile',
+  data: function() {
+    return {
+      username: '',
+    }
+  },
   methods: {
     getUsername: function () {
       const username = localStorage.getItem('username')
-      return username
+      this.username = username
     },
-  }
+  },
+  created: function () {
+    this.getUsername()
+  },
 }
 </script>
 
