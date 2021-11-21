@@ -74,13 +74,18 @@ export default {
           })
       },
   },
-  created: function () {
-    if (localStorage.getItem('jwt')) {
-      console.log('hi')
-    } else {
-      this.$router.push({ name: 'Login' })
-    }
-  },
+   /* 
+  login 해야만 review 게시판을 접근할 수 있는 기능을 주석 처리한 이유
+  : 실제 우리 서비스에서 로그인 해야만 보여주는게 이익이 될지, 로그인 없이 보여주는 게 이익이 될지 모르고 
+    개발 단게에서는 불편할 수 있어 주석 처리 하였습니다.   
+  */
+  // created: function () {
+  //   if (localStorage.getItem('jwt')) {
+  //     console.log('hi')
+  //   } else {
+  //     this.$router.push({ name: 'Login' })
+  //   }
+  // },
 
 
 }
