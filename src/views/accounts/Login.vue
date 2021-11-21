@@ -67,7 +67,8 @@ export default {
 
 <style>
 .login {
-  color: #f4f4f4;
+  color: #000000;
+  /* #f4f4f4; */
   display: flex;
   flex-direction: column;
   -webkit-box-pack: center;

@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home.vue'
-import About from '@/views/About.vue'
-import Movie  from '@/views/Movie.vue'
-import Reviews from '@/views/Reviews.vue'
+import Home from '@/views/Home'
+import About from '@/views/About'
+import Movie  from '@/views/Movie'
+import Reviews from '@/views/Reviews'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
-import CreateReview from '@/views/CreateReview.vue'
+import Profile from '@/views/Profile'
+import CreateReview from '@/views/CreateReview'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,11 @@ const routes = [
     path: '/accouts/login',
     name: 'Login',
     component: Login,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   },
   {
     path: '/reviews/create',

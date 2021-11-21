@@ -6,6 +6,7 @@
       <router-link :to="{name: 'Movie'}">Movie</router-link> |
       <router-link :to="{name: 'Reviews'}">Reviews</router-link> |
       <span v-if="isLogin">
+        <router-link :to="{name: 'Profile'}">Profile</router-link> |
         <router-link @click.native="logout" to="#">Logout</router-link>
       </span>
       <span v-else>

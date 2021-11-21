@@ -58,13 +58,14 @@ export default {
   : 실제 우리 서비스에서 로그인 해야만 보여주는게 이익이 될지, 로그인 없이 보여주는 게 이익이 될지 모르고 
     개발 단게에서는 불편할 수 있어 주석 처리 하였습니다.   
   */
-  // created: function () {
-  //   if (localStorage.getItem('jwt')) {
-  //     this.getReviews()
-  //   } else {
-  //     this.$router.push({name: 'Login'})
-  //   }
-  // }
+  created: function () {
+    this.getReviews()
+    // if (localStorage.getItem('jwt')) {
+    //   this.getReviews()
+    // } else {
+    //   this.$router.push({name: 'Login'})
+    // }
+  }
 
 }
 </script>
