@@ -78,6 +78,7 @@ export default {
     })
     .then((res) =>{
       this.popular_movies = res.data.results
+      console.log(res.data.results)
     })
     .catch(err => console.log(err))
     axios.get(MOVIE_DB_API_URL_TOP_RATED, {
