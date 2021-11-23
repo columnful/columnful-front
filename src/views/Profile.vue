@@ -48,6 +48,7 @@ export default {
     return {
       UserData: '',
       Follow: '',
+      profileUsername: '',
       // ButtonText: '팔로우하기'
     }
   },
