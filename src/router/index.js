@@ -8,6 +8,7 @@ import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import Profile from '@/views/Profile'
 import CreateReview from '@/views/CreateReview'
+import UpdateReview from '@/views/UpdateReview'
 import ReviewDetail from '@/views/ReviewDetail'
 
 Vue.use(VueRouter)
@@ -44,7 +45,7 @@ const routes = [
     component: Login,
   },
   {
-    path: '/profile',
+    path: `/profile/:profileUsername`,
     name: 'Profile',
     component: Profile,
   },
@@ -54,9 +55,14 @@ const routes = [
     component: CreateReview,
   },
   {
-    path: `/reviews/reviews/${ReviewDetail.reviewId}`,
+    path: `/reviews/reviews/:reviewId`,
     name: 'ReviewDetail',
     component: ReviewDetail,
+  },
+  {
+    path: '/reviews/reviews/:reviewId',
+    name: 'UpdateReview',
+    component: UpdateReview,
   },
 
 ]

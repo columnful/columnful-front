@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Movie</h1>
+      <movie-card></movie-card>
       <div id="movie_cards">
 
       <Movies

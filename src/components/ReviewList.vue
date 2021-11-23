@@ -1,21 +1,32 @@
 <template>
   <div>
-    <body
-      v-for="review in reviews"
-      :key="review.id"
-      :review="review"
-      >
-        <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
-          번호 : <b>{{ review.id }}</b> |
-          제목 : <b>{{ review.title }}</b>
-        </router-link>
-    </body>
+    <ul>
+      <li>
+        <body
+          v-for="review in reviews"
+          :key="review.id"
+          :review="review"
+          id="list"
+          >
+            <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
+              <!-- 번호 : <b>{{ review.id }}</b> | -->
+              <b>{{ review.title }}</b>
+            </router-link>
+            <p></p>
+            <div>
+              <router-link :to="{name: 'Profile', params: { profileUsername: review.username }}">
+                <b>{{ review.username }}</b> 비평가
+              </router-link>
+              <hr width=500px>
+            </div>
+        </body>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 import axios from'axios'
-// import { mapState } from 'vuex'
 // // import ReviewListItem from '@/components/ReviewListItem'
 
 export default {
@@ -23,12 +34,7 @@ export default {
   // components: {
   //   ReviewListItem,
   // },
-  // data () {}
-  // computed: {
-  //   ...mapState([
-  //     'reviews'
-  //   ])
-  // }
+
   data() {
     return {
       reviews: []
@@ -73,6 +79,70 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  label, input, textarea {
+	transition: color 0.4s ease, background-color 0.1s ease-in-out;
+}
 
+label {
+  color: lighten(#888888, 15);
+  font-size: 70%;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+}
+
+input, textarea {
+  background-color: transparent;
+  border: none;
+  color: darken(#888888, 15);
+  font-size: 18px;
+  margin: 9px 0 7px 0;
+  margin: 0;
+  padding: 2em 10px 10px 10px;
+  outline: none;
+  width: 100%;
+
+}
+
+ul {
+  background-color: #fffdfa;
+  border: 5px solid #888888;
+  list-style-type: none;
+  margin: 1em auto;
+  padding: 0;
+  width: 800px;
+}
+
+li {
+  border-bottom: 1px solid lighten(#888888, 25);
+  margin-top: -1px;
+  position: relative;
+}
+  .list {
+    color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-top: 8rem;
+    position: relative;
+    z-index: 2;
+  }
+  #list {
+    text-align: left;
+    border: none;
+    color: darken(#888888, 15);
+    font-size: 18px;
+    margin: 0;
+    padding: 1em 10px 10px 10px;
+    outline: none;
+    width: 100%;
+  }
+  hr {
+    margin-left: 0;
+  }
 </style>

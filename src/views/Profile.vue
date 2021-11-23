@@ -2,8 +2,13 @@
   <div>
     <h1>This is profile</h1>
     <div>
-      <user-profile>
+      <user-profile v-bind:userData="UserData">
       </user-profile>
+      <div v-if="profileUsername != this.$store.state.username">
+        <!-- <button @click="followUser" v-text="ButtonText"></button> -->
+        <button v-if="Follow" @click="followUser"> 언팔하기 </button>
+        <button v-else @click="followUser"> 팔로우하기 </button>
+      </div>
     </div>
     <hr>
     <div>
@@ -24,6 +29,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import UserProfile from '@/components/UserProfile'
 import LikeGenre from '@/components/LikeGenre'
 import MyReviewList from '@/components/MyReviewList'
@@ -38,15 +44,79 @@ export default {
     LikeMovieList,
   },
 
-  methods: {
+  data: function() {
+    return {
+      UserData: '',
+      Follow: '',
+      // ButtonText: '팔로우하기'
+    }
+  },
 
-    created: function () {
-      if (localStorage.getItem('jwt')) {
-        this.getReviews()
-      } else {
-        this.$router.push({name: 'Login'})
+  methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        headers: {
+          Authorization: `JWT ${token}`
+        }
       }
+      return config
     },
+
+    getUser: function () {
+      const config = this.setToken()
+      axios.get(`http://127.0.0.1:8000/accounts/profile/${this.profileUsername}/`, config)
+        .then((res) => {
+          this.UserData = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+
+    followUser: function () {
+      const config = this.setToken()
+      axios.get(`http://127.0.0.1:8000/accounts/profile/${this.profileUsername}/follow/`, config)
+        .then((res) => {
+          this.Follow = res.data
+          this.isFollowing
+          // console.log(this.Follow)
+
+          // if (this.Follow) {
+          //   this.ButtonText = '언팔로우하기'
+          // } else {
+          //   this.ButtonText = '팔로우하기'
+          // }
+          // console.log(this.ButtonText)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+
+    isFollowing: function () {
+      return this.Follow
+    },
+
+  },
+  // computed: {
+  //   isFollowing: function () {
+  //     return this.Follow
+  //   },
+  // },
+  created: function () {
+    if (localStorage.getItem('jwt')) {
+      this.profileUsername = this.$route.params.profileUsername
+      this.getUser()
+      this.isFollowing()
+      if (this.profileUsername !== this.$store.state.username) {
+        this.followUser()
+        this.followUser()
+      }
+
+    } else {
+      this.$router.push({name: 'Login'})
+    }
   },
 }
 </script>

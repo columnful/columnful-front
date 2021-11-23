@@ -41,7 +41,8 @@ export default {
           const username = res.config.data.split('"')[3]
           localStorage.setItem('jwt', res.data.token)
           localStorage.setItem('username', username)
-          
+          // vuex store 사용하여 로그인한 username을 전역에서 사용할 수 있도록 함 
+          this.$store.commit('getUsername', username)
           this.$emit('login')
           this.$router.push({ name: 'Home' })
         })

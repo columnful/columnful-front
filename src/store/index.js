@@ -5,9 +5,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    reviews: []
+    reviews: [],
+    username: '',
   },
   mutations: {
+    getUsername (state, username) {
+      state.username = username
+    }
   },
   actions: {
   },

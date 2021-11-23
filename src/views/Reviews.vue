@@ -12,8 +12,10 @@
         :current-page="currentPage"
       >
         <!-- @row-clicked="myRowClickHandler" -->
-      </div>
-    <router-link to="/reviews/create/">Create</router-link>
+    </div>
+    <ul id="btn">
+      <router-link to="/reviews/create/">비평 쓰기</router-link>
+    </ul>
     <review-list>
     </review-list>
   </div>
@@ -91,42 +93,68 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
-#app > div > div > div > ul > li.page-item.active > button {
-  background-color: #1f1f1f;
-  border-color: #1f1f1f;
-  color: #ffffff;
+label, input, textarea {
+	transition: color 0.4s ease, background-color 0.1s ease-in-out;
 }
-#app > div > div > div > ul > li > button {
-  color: #1f1f1f;
-}
-.list {
-  color: #f4f4f4;
-  display: flex;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  justify-content: center;
-  padding-top: 8rem;
-  position: relative;
-  z-index: 2;
-}
-.bgimg {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background: no-repeat center center/cover;
-}
-.bgimg::after {
-  content: "";
+
+label {
+  color: lighten(#888888, 15);
+  font-size: 70%;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 10px;
+
+  /* input:focus+& {
+    color: darken(#0074D9, 10);
+    font-weight: bold;
+    letter-spacing: -0.01em;
+  } */
+}
+
+input, textarea {
+  background-color: transparent;
+  border: none;
+  color: darken(#888888, 15);
+  font-size: 18px;
+  margin: 9px 0 7px 0;
+  margin: 0;
+  padding: 2em 10px 10px 10px;
+  outline: none;
   width: 100%;
-  height: 100%;
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.9);
-  box-shadow: 120px 100px 250px #000000, inset -120px -100px 250px #000000;
+
+    /* &:focus {
+      color: #000;
+      background-color: lighten(#888888, 40);
+      box-shadow: 0px 3px 4px -2px rgba(0,0,115,0.25) inset;
+    } */
+}
+
+ul {
+  background-color: #fffdfa;
+  border: 5px solid #888888;
+  list-style-type: none;
+  margin: 1em auto;
+  padding: 0;
+  width: 800px;
+}
+
+li {
+  border-bottom: 1px solid lighten(#888888, 25);
+  margin-top: -1px;
+  position: relative;
+}
+
+#btn {
+  /* 합쳐서 800 */
+  padding-right: 20px;
+  width: 780px;
+  /* margin-left: 700px; */
+  text-align: right;
+  border: 0px solid #888888;
 }
 
 </style>

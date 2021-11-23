@@ -4,21 +4,39 @@
       :key="review.id"
       :review="review">
       <div>
-        {{ review.title }}
+        <h1>{{ review.title }}</h1>
       </div>
-      {{ review.id }} 번째 글, 비평가 : {{ review.username }}
+      비평가 : <router-link :to="{name: 'Profile', params: { profileUsername: review.username }}">{{ review.username }}</router-link>
       <hr>
-      {{ review.content }}
-      <hr>
+      <ul>
+        <li>
+          <p style="white-space: pre-line; text-align: left; margin-left: 10px; font-size: 18px;">{{ review.content }}</p>
+        </li>
+      </ul>
       <div v-if="review.username === this.username">
-        <button on id="delete-review" class="w3-bar-item w3-button tablink" @click="deleteReview"><i class="fa fa-plane w3-margin-right"></i>Delete</button>
+        <button class="w3-bar-item w3-button tablink" @click="updateReview">글 수정</button>
+        <button on id="delete-review" class="w3-bar-item w3-button tablink" @click="deleteReview"><i class="fa fa-plane w3-margin-right"></i>글 삭제</button>
       </div>
     </body>
+    <hr>
+    <h4 class="font-weight-bolder text-center mb-0">댓글</h4>
+    <comment-list
+      :reviewId="reviewId"
+      :newComment="newComment"
+    />
+    <!-- <ul>
+      <li>
+        <form id="comment" @submit.prevent="createComment">
+          <input id="commentForm" class="form-control form-control-sm" v-model="commentContent" type="text" placeholder="댓글을 입력해주세요.">
+          <button>댓글 달기</button>
+        </form>
+      </li>
+    </ul> -->
   </div>
 </template>
 
 <script>
-// import CommentList from '@/components/CommentList'
+import CommentList from '@/components/CommentList'
 // import moment from 'moment'
 import axios from 'axios'
 export default {
@@ -43,7 +61,7 @@ export default {
 
   },
   components: {
-    // CommentList
+    CommentList
   },
   created: function () {
     this.username = localStorage.getItem('username')
@@ -79,13 +97,18 @@ export default {
         })
         .catch(err => console.log(err))
     },
+
+    updateReview: function () {
+      this.$router.push({name: 'UpdateReview',
+      params: { review: this.review }})
+    },
     // updateArticle: function (article) {
     //   this.$router.push({name: 'UpdateArticle',
     //   params: { article }})
     // },
     // createComment: function () {
     //   const config = this.setToken()
-    //   axios.post(`http://127.0.0.1:8000/community/${this.category}/article/${this.articleId}/comment/`,{ content: this.commentContent },config)
+    //   axios.post(`http://127.0.0.1:8000/reviews/reviews/${this.reviewId}/comment/`,{ content: this.commentContent },config)
     //     .then((res) => {
     //       this.newComment = res.data
     //       this.commentContent = ''
@@ -99,35 +122,110 @@ export default {
 </script>
 
 <style scoped>
-#app > div {
-  color: black;
-}
-.bgimg {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background: no-repeat center center/cover;
-}
-.bgimg::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 120px 100px 250px #000000, inset -120px -100px 250px #000000;
-}
-.article {
-  color: #f4f4f4;
-  display: flex;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  justify-content: center;
-  width: 100%;
-  padding-top: 8rem;
-  position: relative;
-  z-index: 2;
-}
+  #app > div {
+    color: black;
+  }
+  .bgimg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: no-repeat center center/cover;
+  }
+  .bgimg::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 120px 100px 250px #000000, inset -120px -100px 250px #000000;
+  }
+  .article {
+    color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 8rem;
+    position: relative;
+    z-index: 2;
+  }
+  label, input, textarea, #text {
+	transition: color 0.4s ease, background-color 0.1s ease-in-out;
+  }
+  label {
+    color: lighten(#888888, 15);
+    font-size: 70%;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    /* input:focus+& {
+      color: darken(#0074D9, 10);
+      font-weight: bold;
+      letter-spacing: -0.01em;
+    } */
+    }
+  input, textarea, #text {
+    background-color: transparent;
+    border: none;
+    color: darken(#888888, 15);
+    font-size: 14px;
+    /* margin: 9px 0 7px 0; */
+    margin: 0;
+    padding: 5px 5px 5px 5px;
+    outline: none;
+    width: 100%;
+
+      /* &:focus {
+        color: #000;
+        background-color: lighten(#888888, 40);
+        box-shadow: 0px 3px 4px -2px rgba(0,0,115,0.25) inset;
+      } */
+  }
+
+  form {
+    background-color: transparent;
+    border: none;
+    color: darken(#888888, 10);
+    font-size: 18px;
+    /* margin: 9px 0 7px 0; */
+    margin: 0;
+    padding: 5px 0px 5px 0px;
+    outline: none;
+    width: 100%;
+
+      /* &:focus {
+        color: #000;
+        background-color: lighten(#888888, 40);
+        box-shadow: 0px 3px 4px -2px rgba(0,0,115,0.25) inset;
+      } */
+  }
+
+  ul {
+    background-color: #fffdfa;
+    border: 5px solid #888888;
+    list-style-type: none;
+    margin: 1em auto;
+    padding: 0;
+    width: 800px;
+  }
+  li {
+    border-bottom: 1px solid lighten(#888888, 25);
+    margin-top: -1px;
+    position: relative;
+  }
+  #comment {
+    display: inline-block;
+    width: 100%;
+  }
+  #commentForm {
+    width: 85%;
+  }
 </style>

@@ -6,7 +6,7 @@
       <router-link :to="{name: 'Movie'}">Movie</router-link> |
       <router-link :to="{name: 'Reviews'}">Reviews</router-link> |
       <span v-if="isLogin">
-        <router-link :to="{name: 'Profile'}">Profile</router-link> |
+        <router-link :to="{name: 'Profile', params: { profileUsername: username }}">Profile</router-link> |
         <router-link @click.native="logout" to="#">Logout</router-link>
       </span>
       <span v-else>
@@ -25,12 +25,14 @@ export default {
   data: function () {
     return {
       isLogin: false,
+      username: '',
     }
   },
   created: function () {
     const token = localStorage.getItem('jwt')
     if (token) {
       this.isLogin = true
+      this.username = localStorage.getItem('username')
     }
   },
   
@@ -48,24 +50,24 @@ export default {
 
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
 
-#nav {
-  padding: 30px;
-}
+  #nav {
+    padding: 30px;
+  }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  #nav a {
+    font-weight: bold;
+    color: #2c3e50;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  #nav a.router-link-exact-active {
+    color: #42b983;
+  }
 </style>
