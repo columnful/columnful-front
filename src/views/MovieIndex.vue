@@ -15,9 +15,9 @@
 import MovieCard from '@/components/MovieCard'
 import axios from 'axios'
 
-const MOVIE_DB_API_URL_POPULAR = 'https://api.themoviedb.org/3/movie/popular'
-const MOVIE_DB_API_URL_TOP_RATED = 'https://api.themoviedb.org/3/movie/top_rated'
-const MOVIE_DB_API_KEY = 'd96fad9400bff08e7653e874066ac99b'
+const TMDB_API_URL_POPULAR = 'https://api.themoviedb.org/3/movie/popular'
+const TMDB_API_URL_TOP_RATED = 'https://api.themoviedb.org/3/movie/top_rated'
+const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
 
 export default {
   name: 'MovieIndex',
@@ -37,9 +37,9 @@ export default {
     MovieCard,
   },
   created: function () {
-    axios.get(MOVIE_DB_API_URL_POPULAR, {
+    axios.get(TMDB_API_URL_POPULAR, {
       params: {
-        api_key: MOVIE_DB_API_KEY,
+        api_key: TMDB_API_KEY,
         language: "ko-KR",
         page: 1,
         region: 'kr'
@@ -50,9 +50,9 @@ export default {
       console.log(res.data.results)
     })
     .catch(err => console.log(err))
-    axios.get(MOVIE_DB_API_URL_TOP_RATED, {
+    axios.get(TMDB_API_URL_TOP_RATED, {
       params: {
-        api_key: MOVIE_DB_API_KEY,
+        api_key: TMDB_API_KEY,
         language: "ko-KR",
         page: 1,
         region: 'kr'

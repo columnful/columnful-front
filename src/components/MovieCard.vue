@@ -7,6 +7,7 @@
         width="286px" height="409.55px"
         v-for="(movie, idx) in movies"
         :key="idx">
+        <div v-b-modal.modal-scrollable @click="selectMovie(movie.id)">
           <template v-if="movie.poster_path.slice(0,4) == 'http'">
             <img width="100%" :src="movie.poster_path" alt="">
           </template>
@@ -14,6 +15,7 @@
           <template v-else>
             <img width="100%" :src="'https://image.tmdb.org/t/p/w500'+movie.poster_path" alt="">
           </template>
+        </div>
       </v-card>
       </div>
 
