@@ -10,6 +10,7 @@ import Profile from '@/views/Profile'
 import CreateReview from '@/views/CreateReview'
 import UpdateReview from '@/views/UpdateReview'
 import ReviewDetail from '@/views/ReviewDetail'
+import MovieIndex from '@/views/MovieIndex'
 
 Vue.use(VueRouter)
 
@@ -63,6 +64,11 @@ const routes = [
     path: '/reviews/reviews/:reviewId',
     name: 'UpdateReview',
     component: UpdateReview,
+  },
+  {
+    path: '/movie/index',
+    name: 'MovieIndex',
+    component: MovieIndex,
   },
 
 ]
