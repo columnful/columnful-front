@@ -1,6 +1,7 @@
 <template>
   <div class="movies">
     <div class="movies__slide">
+      <h3 class="d-flex justify-content-start font-weight-bold" style="color: black">{{ group_title }}</h3>
       <carousel
         :navigationEnabled="true"
         :navigation-next-label="nextLabel"
@@ -12,8 +13,9 @@
           class="mt-3"
           v-for="movie in movies"
           :key="movie.id"> 
-        
-          <div v-b-modal.modal-scrollable @click="selectMovie(movie.id)">
+
+          <!-- modal 연결 방법 다시 생각하기 -->
+          <!-- <div v-b-modal.modal-scrollable @click="selectMovie(movie.id)"> -->
             <template v-if="movie.poster_path.slice(0,4) == 'http'">
               <img width="100%" class="movie__poster" :src="movie.poster_path" alt="">
             </template>
@@ -21,10 +23,10 @@
             <template v-else>
               <img width="100%" class="movie__poster" :src="'https://image.tmdb.org/t/p/w500'+movie.poster_path" alt="">
             </template>
-          </div>
+          <!-- </div> -->
 
         </slide>
-        
+
       </carousel>
     </div>
   </div>
@@ -45,6 +47,9 @@ export default {
   props: {
     movies: {
       type: Array
+    },
+    group_title: {
+      type: String
     },
   },
   data () {
