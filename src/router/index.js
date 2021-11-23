@@ -10,7 +10,7 @@ import Profile from '@/views/Profile'
 import CreateReview from '@/views/CreateReview'
 import ReviewDetail from '@/views/ReviewDetail'
 import MovieIndex from '@/views/MovieIndex'
-import MovieDetail from '@/views/MovieDetail'
+// import MovieDetail from '@/views/MovieDetail'
 
 Vue.use(VueRouter)
 
@@ -65,11 +65,11 @@ const routes = [
     name: 'MovieIndex',
     component: MovieIndex,
   },
-  {
-    path: '/movie/detail',
-    name: 'MovieDetial',
-    component: MovieDetail,
-  },
+  // {
+  //   path: '/movie/detail',
+  //   name: 'MovieDetial',
+  //   component: MovieDetail,
+  // },
 
 ]
 

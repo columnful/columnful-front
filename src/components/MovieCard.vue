@@ -52,26 +52,12 @@
 
 <script>
 // import { Carousel, Slide } from "vue-carousel"
-// import axios from "axios"
+import axios from "axios"
 
 // const URL_PREFIX = 'https://image.tmdb.org/t/p/w500'
 
 export default {
   name:"MovieCard",
-  components: {
-    // Carousel,
-    // Slide,
-  },
-  // data() {
-  //   return {
-  //     active: false
-  //   }
-  // },
-  // data: function() {
-  //   return {
-  //     genres_list:{}
-  //   }
-  // },
   props: {
     movies: {
       type: Array
@@ -80,19 +66,31 @@ export default {
       type: Boolean
     }
   },
-  // created: function() {
-  //   axios.get(`http://127.0.0.1:8000/genre/movie/list`)
-  //     .then((res) => {
-  //       this.genres_list = res.data
-  //       console.log(res.data)
-  //     })
-  //       .catch(err => console.log(err))
-  // }
-  // methods: {
-  //   mouseover: function () {
-  //     alert('mouseover')
-  //   }
-  // },
+  data () {
+    return {
+      showModal: false,
+      showLoading: true,
+      movieDetail: Object,
+    }
+  },
+  methods: {
+    getMovieData: function () {
+      axios.get(`http://127.0.0.1:8000/movies/${this.movie.movie_id}`)
+        .then((res) => {
+          // console.log(res.data)
+          this.movieDetail = res.data
+        })
+        .catch(err => console.log(err))
+    },
+    trueModal: function () {
+      if (this.isLogin === true) {
+        this.$store.dispatch('trueModal')
+      }
+    },
+    selectMovie: function (movieId) {
+      this.$store.dispatch('selectMovie', movieId)
+    },
+  },
   filters: {
     findGenre: function (value) {
       if (value === 12) {

@@ -7,7 +7,7 @@
       group_title="POPULAR"
       class="mt-5"
     />
-  </div>
+    </div>
 
 </template>
 
@@ -63,19 +63,19 @@ export default {
     })
     .catch(err => console.log(err))
   },
-  methods: {
-    newAlert: function () {
-      if (this.isLogin === false) {
-      this.$fire({
-        title: "로그인을 해주세요!",
-        text: "",
-        type: "error",
-      }).then(r => {
-        console.log(r.value);
-      });
-      }
-    },
-  } 
+  // methods: {
+  //   newAlert: function () {
+  //     if (this.isLogin === false) {
+  //     this.$fire({
+  //       title: "로그인을 해주세요!",
+  //       text: "",
+  //       type: "error",
+  //     }).then(r => {
+  //       console.log(r.value);
+  //     });
+  //     }
+  //   },
+  // } 
 }
 </script>
 

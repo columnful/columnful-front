@@ -14,7 +14,6 @@
       <h2>POPULAR</h2>
       <MovieCard
         :movies="popular_movies"
-        @click.native="newAlert"
         group_title="POPULAR"
         class="mt-5"
       />
@@ -22,7 +21,6 @@
       <h2>TOP RATED</h2>
       <MovieCard
         :movies="toprated_movies"
-        @click.native="newAlert"
         group_title="TOP RANKED"
         class="mt-5"
       />
@@ -96,34 +94,35 @@ export default {
     })
     .catch(err => console.log(err))
 
-    const token = localStorage.getItem('jwt')
-    const config = {
-      headers: {
-        Authorization: `JWT ${token}`
-      }
-    }
-    axios.get('http://127.0.0.1:8000/movies/recommend_movie_user/', config)
-      .then((res) => {
-        console.log(res)
-        this.recommend_movie_user = res.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    // const token = localStorage.getItem('jwt')
+    // const config = {
+    //   headers: {
+    //     Authorization: `JWT ${token}`
+    //   }
+    // }
+    // 영화추천
+    // axios.get('http://127.0.0.1:8000/movies/recommend_movie_user/', config)
+    //   .then((res) => {
+    //     console.log(res)
+    //     this.recommend_movie_user = res.data
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
   },
-  methods: {
-    newAlert: function () {
-      if (this.isLogin === false) {
-      this.$fire({
-        title: "로그인을 해주세요!",
-        text: "",
-        type: "error",
-      }).then(r => {
-        console.log(r.value);
-      });
-      }
-    },
-  }
+  // methods: {
+  //   newAlert: function () {
+  //     if (this.isLogin === false) {
+  //     this.$fire({
+  //       title: "로그인을 해주세요!",
+  //       text: "",
+  //       type: "error",
+  //     }).then(r => {
+  //       console.log(r.value);
+  //     });
+  //     }
+  //   },
+  // }
 }
 </script>
 

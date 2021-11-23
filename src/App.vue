@@ -34,6 +34,9 @@ export default {
   },
   
   methods: {
+    selectMovie: function (data) {
+      this.selectMovieId2 = data
+    },
     logout: function () {
       this.isLogin = false
       localStorage.removeItem('jwt')
