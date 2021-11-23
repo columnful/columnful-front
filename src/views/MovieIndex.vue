@@ -6,7 +6,7 @@
       group_title="POPULAR"
       class="mt-5"
     />
-    </div>
+  </div>
 
 </template>
 
