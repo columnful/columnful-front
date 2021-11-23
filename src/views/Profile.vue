@@ -48,6 +48,7 @@ export default {
     return {
       UserData: '',
       Follow: '',
+      profileUsername: '',
       // ButtonText: '팔로우하기'
     }
   },
@@ -68,6 +69,7 @@ export default {
       axios.get(`http://127.0.0.1:8000/accounts/profile/${this.profileUsername}/`, config)
         .then((res) => {
           this.UserData = res.data
+          console.log(this.UserData)
         })
         .catch(err => {
           console.log(err)

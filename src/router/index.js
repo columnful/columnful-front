@@ -49,6 +49,7 @@ const routes = [
     path: `/profile/:profileUsername`,
     name: 'Profile',
     component: Profile,
+    // props: true,
   },
   {
     path: '/reviews/create',

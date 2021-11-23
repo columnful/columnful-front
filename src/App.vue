@@ -8,6 +8,7 @@
       <span v-if="isLogin">
         <router-link :to="{name: 'Profile', params: { profileUsername: username }}">Profile</router-link> |
         <router-link @click.native="logout" to="#">Logout</router-link>
+        <span>{{ username }} 님, 반갑습니다.</span>
       </span>
       <span v-else>
         <router-link :to="{name: 'Signup'}">Signup</router-link> |
@@ -33,6 +34,7 @@ export default {
     if (token) {
       this.isLogin = true
       this.username = localStorage.getItem('username')
+      console.log(localStorage)
     }
   },
   
@@ -46,8 +48,6 @@ export default {
 }
 
 </script>
-
-
 
 <style>
   #app {
