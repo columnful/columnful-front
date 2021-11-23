@@ -48,19 +48,19 @@ export default {
         })
         .catch(err => {
           console.log(err)
-          this.newAlert()
+          // this.newAlert()
         })
     },
 
-    newAlert: function () {
-      this.$fire({
-        title: "아이디나 비밀번호를 확인해주세요.",
-        text: "",
-        type: "error",
-      }).then(r => {
-        console.log(r.value);
-      });
-    }
+    // newAlert: function () {
+    //   this.$fire({
+    //     title: "아이디나 비밀번호를 확인해주세요.",
+    //     text: "",
+    //     type: "error",
+    //   }).then(r => {
+    //     console.log(r.value);
+    //   });
+    // }
   },
 }
 </script>

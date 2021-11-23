@@ -39,24 +39,25 @@ export default {
           this.$router.push({ name: 'Login' })
         })
         .catch(err => {
-          const errorMessage = err.message
-          if (errorMessage[errorMessage.length-3, errorMessage.length-1] === '6') {
-            this.newAlert("비밀번호가 틀립니다!")
-          }
-          else {
-            this.newAlert("이미 존재하는 아이디입니다!")
-          }
+          console.log(err)
+          // const errorMessage = err.message
+          // if (errorMessage[errorMessage.length-3, errorMessage.length-1] === '6') {
+          //   this.newAlert("비밀번호가 틀립니다!")
+          // }
+          // else {
+          //   this.newAlert("이미 존재하는 아이디입니다!")
+          // }
         })
     },
-    newAlert: function (data) {
-      this.$fire({
-        title: data,
-        text: "",
-        type: "error",
-      }).then(r => {
-        console.log(r.value);
-      });
-    }
+    // newAlert: function (data) {
+    //   this.$fire({
+    //     title: data,
+    //     text: "",
+    //     type: "error",
+    //   }).then(r => {
+    //     console.log(r.value);
+    //   });
+    // }
   },
 }
 </script>
