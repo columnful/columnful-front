@@ -10,16 +10,16 @@
       </carousel>
       
       <div id="movie_card">
-
+      <router-link to="/movie/index">LOAD MORE</router-link>
       <h2>POPULAR</h2>
-      <MovieCard
+      <MovieCarousel
         :movies="popular_movies"
         group_title="POPULAR"
         class="mt-5"
       />
 
       <h2>TOP RATED</h2>
-      <MovieCard
+      <MovieCarousel
         :movies="toprated_movies"
         group_title="TOP RANKED"
         class="mt-5"
@@ -40,7 +40,8 @@
 <script>
 require('dotenv').config()
 import { Carousel, Slide } from "vue-carousel"
-import MovieCard from '@/components/MovieCard'
+// import MovieCard from '@/components/MovieCard'
+import MovieCarousel from '@/components/MovieCarousel'
 import axios from 'axios'
 
 const TMDB_API_URL_POPULAR = 'https://api.themoviedb.org/3/movie/popular'
@@ -63,7 +64,8 @@ export default {
     },
   },
   components: {
-    MovieCard,
+    // MovieCard,
+    MovieCarousel,
     Carousel,
     Slide
   },
