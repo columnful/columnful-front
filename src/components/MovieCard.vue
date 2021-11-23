@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div class="container">
+    <div class="carrd" width="286px">
       <div class="card"
         width="286px" height="409.55px"
         v-for="(movie, idx) in movies"
@@ -50,7 +49,6 @@
         <v-card-title> {{movie.title}} </v-card-title>
       </v-card>
       </div> -->
-  </div>
 </template>
 
 <script>

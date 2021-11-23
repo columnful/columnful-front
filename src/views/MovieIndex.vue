@@ -3,7 +3,6 @@
     <h2>MOVIE</h2>
     <MovieCard
       :movies="popular_movies"
-      @click.native="newAlert"
       group_title="POPULAR"
       class="mt-5"
     />
