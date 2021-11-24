@@ -17,7 +17,7 @@
       paginationColor="#999"
       :paginationPadding=3>
       <slide class="slide_item">
-        <img class="banner_img" src="../images/banner/about_time_cropped.jpg" style="width:100%">
+        <img class="banner_img" src="../assets/images/banner/about_time_cropped.jpg" style="width:100%">
       </slide>
     </carousel>
     <br><br>
