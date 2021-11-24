@@ -16,15 +16,17 @@
           :key="movie.id"> 
 
           <!-- modal 연결 방법 다시 생각하기 -->
-          <div v-modal.movie-detail @click="selectMovie(movie.id)">
-            <template v-if="movie.poster_path.slice(0,4) == 'http'">
-              <img width="100%" class="movie__poster" :src="movie.poster_path" alt="">
-            </template>
+          <!-- <div v-modal.movie-detail @click="selectMovie(movie.id)"> -->
+          <!-- <button @click="showDetail=true" type="button"> -->
+          <template v-if="movie.poster_path.slice(0,4) == 'http'">
+            <img width="100%" class="movie__poster" :src="movie.poster_path" alt="">
+          </template>
 
-            <template v-else>
-              <img width="100%" class="movie__poster" :src="'https://image.tmdb.org/t/p/w500'+movie.poster_path" alt="">
-            </template>
-          </div>
+          <template v-else>
+            <img width="100%" class="movie__poster" :src="'https://image.tmdb.org/t/p/w500'+movie.poster_path" alt="">
+          </template>
+          <!-- </button> -->
+          <!-- </div> -->
 
         </slide>
 
@@ -62,6 +64,7 @@ export default {
       URL_PREFIX,
       showLoading: true,
       movieDetail: Object,
+      showDetail:false,
     }
   },
   methods: {

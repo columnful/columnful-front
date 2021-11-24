@@ -1,17 +1,5 @@
 <template>
   <div>
-    <modal ref="modalName">
-      <template v-slot:header>
-        <h1>DETAILS</h1>
-      </template>
-
-      <template v-slot:body>
-        <Content/>
-      </template>
-
-      <template v-slot:footer>
-      </template>
-    </modal>
     <carousel :per-page="1" class="banner_list"
       paginationActiveColor="#e01a31"
       paginationColor="#999"
@@ -52,8 +40,8 @@
 require('dotenv').config()
 import { Carousel, Slide } from "vue-carousel"
 import MovieCarousel from '@/components/MovieCarousel'
-import Modal from "@/components/Modal"
-import Content from "@/components/Content"
+// import Modal from "@/components/Modal"
+// import Content from "@/components/Content"
 import axios from 'axios'
 
 const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
@@ -67,6 +55,7 @@ export default {
       nowplaying_movies: [],
       upcoming_movies: [],
       recommend_movie_user: [],
+      showDetail:false,
     }
   },
   props: {
@@ -75,8 +64,8 @@ export default {
     },
   },
   components: {
-    Modal,
-    Content,
+    // Modal,
+    // Content,
     MovieCarousel,
     Carousel,
     Slide,

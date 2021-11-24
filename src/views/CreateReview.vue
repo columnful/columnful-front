@@ -14,15 +14,15 @@
           </li>
         </ul>
       </div> 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <ul>
           <li>
             <label for="Textarea1">Content</label>
             <textarea class="form-control content" id="Textarea1" rows="15" v-model.trim="content"></textarea>
-            <!-- <input contentEditable="true" class="form-control content" id="Textarea1" line-height="500px" v-model.trim="content"> -->
+            <input contentEditable="true" class="form-control content" id="Textarea1" line-height="500px" v-model.trim="content">
           </li>
         </ul>
-      </div>
+      </div> -->
       <button id="input-submit" class="w3-bar-item w3-button tablink " @click="createReview"><i class="fa fa-plane w3-margin-right"></i>투고하기</button>
     </form>
   </div>
