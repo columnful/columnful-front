@@ -7,6 +7,7 @@
         <h1>{{ review.title }}</h1>
       </div>
       비평가 : <router-link :to="{name: 'Profile', params: { profileUsername: review.username }}">{{ review.username }}</router-link>
+      영화 : {{ review.movie_title }}
       <hr>
       <ul>
         <li>

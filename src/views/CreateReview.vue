@@ -13,7 +13,36 @@
             <input type="text" class="form-control title" id="title1" aria-describedby="emailHelp" v-model.trim="title">
           </li>
         </ul>
-      </div> 
+      </div>
+      <!-- <div class="form-group">
+        <ul>
+          <li>
+            <input type="text" class="form-control title" id="movie-title" aria-describedby="emailHelp" v-model.trim="movieTitle">
+          </li>
+        </ul>
+      </div> -->
+      <!--  -->
+      <div>
+        <ul>
+          <li>
+            <label for="movie-title">Movie_Title</label>
+            <i class="fas fa-search">
+              <input class="form-control movie-title" id="movie-title" v-model.trim="movieInput" @input="submitAutoComplete" type="text" style="margin-bottom : 15px;" />
+            </i>
+          </li>
+        </ul>
+        <div class="autocomplete disabled">
+            <!-- @click="searchSkillAdd" -->
+          <div
+            style="cursor: pointer"
+            v-for="(res,i) in result"
+            :key="i"
+            v-on:click="changeValue(res)"
+            v-on:keyup.enter="selectValue('enter', res)"
+          >{{ res }}</div>
+        </div>
+      </div>
+      <!--  -->
       <div class="form-group">
         <ul>
           <li>
@@ -30,6 +59,8 @@
 
 <script>
 import axios from'axios'
+// import skills from "../../skills.js";
+
 
 export default {
   name: 'CreateReview',
@@ -37,6 +68,14 @@ export default {
     return {
       content: '',
       title: '',
+      movieTitle: '',
+      // 
+      movieInput: null,
+      result: null,
+      isActive: false,
+      searchQuery: '',
+      // names: names,
+      // 
     }
   },
   methods: {
@@ -51,34 +90,74 @@ export default {
     },
     createReview: function () {
       const config = this.setToken()
-      console.log(this.token)
-      console.log(this.config)
-      console.log(this.localStorage)
       const ReviewItem = {
         content: this.content,
         title: this.title,
+        movie_title: this.movieInput,
       }
-      if (ReviewItem.title) {
-        axios.post(`http://127.0.0.1:8000/reviews/reviews/`, ReviewItem, config)
-        // axios({
-        //   method: 'post',
-        //   url: 'http://127.0.0.1:8000/reviews/create/',
-        //   data: ReviewItem, 
-        //   headers: this.setToken(),
-        // })
-          .then((res) => {
-            console.log(res)
-            this.$router.push({ name: 'Reviews' })
-            this.title = ''
-          })
-          .catch((err) => {
-            // console.log(this.setToken())
-            console.log(err)
-          })
-          // this.content = null,
+      const isExist = this.$store.state.movies_title.includes(this.movieInput)
+      if (isExist) {
+        console.log(ReviewItem)
+        if (ReviewItem.title) {
+          axios.post(`http://127.0.0.1:8000/reviews/reviews/`, ReviewItem, config)
+            .then((res) => {
+              console.log(res)
+              this.$router.push({ name: 'Reviews' })
+              this.title = ''
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+            // this.content = null,
+        }
+      } else {
+        console.log('영화를 선택하세요')
       }
     },
+    // 
+    submitAutoComplete() {
+      const autocomplete = document.querySelector(".autocomplete");
+      if (this.movieInput) {
+        autocomplete.classList.remove("disabled");
+        this.result = this.$store.state.movies_title.filter((movie) => {
+          return movie.match(new RegExp("^" + this.movieInput, "i"));
+        });
+      } else {
+        autocomplete.classList.add("disabled");
+      }
+    },
+    searchMovieAdd() {
+      console.log(this.i)
+      this.movieTitle = this.res
+      this.movieInput = this.movieTitle
+    },
+    changeValue(str) {
+      const autocomplete = document.querySelector(".autocomplete");
+      console.log(`change value: ${str}`);
+      this.isActive = false;
+      this.movieInput = str;
+      console.log(autocomplete)
+      autocomplete.style.display = 'none';
+
+    },
+    selectValue(keycode, str) {
+      console.log(keycode, str)
+      console.log('이거')
+      // 현재 쓰이지 않고 있음
+      // console.log(this.$store.state.popular_movies[0])
+    },
+    // 
+  },
+  created: function() {
+    this.$store.commit('removeMoviesTitle')
+    this.$store.commit('getMoviesTitle', this.$store.state.popular_movies)
+    // console.log(this.$store.state.movies_title)
+    // console.log(this.$store.state.popular_movies)
+    // console.log(this.$store.state.movies_title)
   }
+  // 
+  
+  // 
 }
 </script>
 
