@@ -2,8 +2,8 @@
   <div class="login">
 
     <form class="justify-content-center mt-12" @submit.prevent="login">
-      <input class="form-control mb-2 mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="아이디를 입력해주세요" type="text" id="username" v-model="credentials.username">
-      <input class="form-control mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="비밀번호를 입력해주세요" type="password" id="password" v-model="credentials.password" @keypress.enter="login">
+      <input class="form-control mb-2 mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="USERNAME" type="text" id="username" v-model="credentials.username">
+      <input class="form-control mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="PASSWORD" type="password" id="password" v-model="credentials.password" @keypress.enter="login">
       
       <button @click="login" type="button" class="btn btn-danger mt-3" style="width: 100%;">LOG IN</button>
     </form>
