@@ -1,19 +1,21 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <Navbar/>
-    </div>
+  <div id="app" sticky-container>
+    <Header/>
+    <Navbar/>
+
     <router-view @login="isLogin=true"/>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
+import Header from '@/components/Header'
 
 export default {
   name: 'App',
   components: {
-    Navbar
+    Navbar,
+    Header,
   },
 }
 </script>
