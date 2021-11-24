@@ -17,7 +17,7 @@
     </div>
     <hr>
     <div>
-      <my-review-list>
+      <my-review-list v-bind:reviews="Reviews">
       </my-review-list>
     </div>
     <hr>
@@ -49,7 +49,7 @@ export default {
       UserData: '',
       Follow: '',
       profileUsername: '',
-      // ButtonText: '팔로우하기'
+      Reviews: [],
     }
   },
 
@@ -69,6 +69,7 @@ export default {
       axios.get(`http://127.0.0.1:8000/accounts/profile/${this.profileUsername}/`, config)
         .then((res) => {
           this.UserData = res.data
+          console.log(res.data)
         })
         .catch(err => {
           console.log(err)
@@ -95,6 +96,34 @@ export default {
         })
     },
 
+    getReviews: function () {
+      const config = this.setToken()
+      axios.get(`http://127.0.0.1:8000/reviews/reviews/get/${this.profileUsername}/`, config)
+        .then((res) => {
+          // console.log(res.data)
+          // console.log(this.Reviews)
+          res.data.forEach((review) => {
+            this.Reviews.push(review.movie_title)
+            // console.log(this.Reviews)
+          })
+          
+        })
+        .then((res) => {
+          console.log(res)
+          this.Reviews.forEach((movie_title) => {
+            axios.get(`http://127.0.0.1:8000/movies/movie_poster/${movie_title}/`, config)
+              .then((res) => {
+                console.log(res.data)
+              })
+
+          })
+        })
+
+        .catch(err => {
+          console.log(err)
+        })
+    },
+
     isFollowing: function () {
       return this.Follow
     },
@@ -110,6 +139,7 @@ export default {
       this.profileUsername = this.$route.params.profileUsername
       this.getUser()
       this.isFollowing()
+      this.getReviews()
       if (this.profileUsername !== this.$store.state.username) {
         this.followUser()
         this.followUser()

@@ -65,16 +65,16 @@ export default {
     },
 
     getReviews: function () {
-        const config = this.setToken()
-        axios.get(`http://127.0.0.1:8000/reviews/create`, config)
-          .then((res) => {
-            this.reviews = res.data
-            console.log('jwt')
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      },
+      const config = this.setToken()
+      axios.get(`http://127.0.0.1:8000/reviews/create`, config)
+        .then((res) => {
+          this.reviews = res.data
+          console.log('jwt')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
   },
    /* 
   login 해야만 review 게시판을 접근할 수 있는 기능을 주석 처리한 이유

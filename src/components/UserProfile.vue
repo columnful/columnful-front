@@ -34,6 +34,7 @@ export default {
   updated: function () {
     this.profile= this.userData
     this.username = this.profile.username
+    // console.log(this.userData)
 
   },
 }
