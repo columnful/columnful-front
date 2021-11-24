@@ -11,7 +11,29 @@
             <input type="text" class="form-control name2" id="exampleInputEmail1" aria-describedby="emailHelp"  v-model.trim="review.title">
           </li>
         </ul>
-      </div> 
+      </div>
+      <!--  -->
+      <div>
+        <ul>
+          <li>
+            <label for="movie-title">Movie_Title</label>
+            <i class="fas fa-search">
+              <input class="form-control movie-title" id="movie-title" v-model.trim="review.movie_title" @input="submitAutoComplete" type="text" style="margin-bottom : 15px;">
+            </i>
+          </li>
+        </ul>
+        <div class="autocomplete disabled">
+            <!-- @click="searchSkillAdd" -->
+          <div
+            style="cursor: pointer"
+            v-for="(res,i) in result"
+            :key="i"
+            v-on:click="changeValue(res)"
+            v-on:keyup.enter="selectValue('enter', res)"
+          >{{ res }}</div>
+        </div>
+      </div>
+      <!--  --> 
       <div class="form-group">
         <ul>
           <li>
@@ -37,6 +59,13 @@ export default {
       // content: '',
       // reviewComment: '', 
       // newRank: 5.0,
+      // 
+      movieInput: null,
+      result: null,
+      isActive: false,
+      searchQuery: '',
+      // names: names,
+      // 
     }
   },
   mounted: function () {
@@ -61,13 +90,53 @@ export default {
 
     forUpdate: function () {
       const config = this.setToken()
-      axios.put(`http://127.0.0.1:8000/reviews/reviews/${this.reviewId}/`, {'title': this.review.title, 'content': this.review.content}, config)
-        .then((res) => {
-          console.log(res)
-          this.$router.push({name: 'ReviewDetail', params: {'review_id': this.review.id }})
-        })
-        .catch(err => console.log(err))
+      const isExist = this.$store.state.movies_title.includes(this.review.movie_title)
+      if (isExist) {
+        axios.put(`http://127.0.0.1:8000/reviews/reviews/${this.reviewId}/`, {'title': this.review.title, 'movie_title': this.review.movie_title, 'content': this.review.content}, config)
+          .then((res) => {
+            console.log(res)
+            this.$router.push({name: 'ReviewDetail', params: {'review_id': this.review.id }})
+          })
+          .catch(err => console.log(err))
+      } else {
+        console.log('영화를 선택하세요')
+      }
     },
+    // 
+    submitAutoComplete() {
+      const autocomplete = document.querySelector(".autocomplete");
+      if (this.review.movie_title) {
+        autocomplete.classList.remove("disabled");
+        autocomplete.style.display = 'block';
+        this.result = this.$store.state.movies_title.filter((movie) => {
+          return movie.match(new RegExp("^" + this.review.movie_title, "i"));
+        });
+      } else {
+        autocomplete.classList.add("disabled");
+      }
+    },
+    searchMovieAdd() {
+      console.log(this.i)
+      this.movieTitle = this.res
+      this.review.movie_title = this.movieTitle
+    },
+    changeValue(str) {
+      const autocomplete = document.querySelector(".autocomplete");
+      console.log(`change value: ${str}`);
+      this.isActive = false;
+      this.review.movie_title = str;
+      console.log(autocomplete)
+      autocomplete.classList.add("disabled");
+      autocomplete.style.display = 'none';
+
+    },
+    selectValue(keycode, str) {
+      console.log(keycode, str)
+      console.log('이거')
+      // 현재 쓰이지 않고 있음
+      // console.log(this.$store.state.popular_movies[0])
+    },
+    // 
 
 
     // submitReview: function () {
@@ -90,6 +159,8 @@ export default {
     // this.title = this.$route.params.review.title
     // this.content = this.$route.params.review.content
     console.log(this.review)
+    this.$store.commit('removeMoviesTitle')
+    this.$store.commit('getMoviesTitle', this.$store.state.popular_movies)
     // this.forUpdate()
   },
 }
