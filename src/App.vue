@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <div id="nav">
+      <Header/>
       <Navbar/>
-    </div>
+
     <router-view @login="isLogin=true"/>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
+import Header from '@/components/Header'
 
 export default {
   name: 'App',
   components: {
-    Navbar
+    Navbar,
+    Header
   },
 }
 </script>

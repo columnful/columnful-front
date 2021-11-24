@@ -1,11 +1,11 @@
 <template>
   <div class="nav d-flex justify-between">
 
-    <div class="nav__logo d-flex">
+    <div class="nav__logo d-flex mx-10">
       <img class="nav__logo-img" src="../assets/images/logo/clarity_star-solid.png">
     </div>
 
-    <div class="nav__menu montserrat d-flex justify-between align-center">
+    <div class="nav__menu d-flex justify-between align-center">
       <router-link to="/">HOME</router-link> 
       <router-link to="/about">ABOUT</router-link> 
       <router-link :to="{name: 'Movie'}">MOVIE</router-link> 
@@ -73,11 +73,11 @@
       </span>
 
       <span class="nav__account-none d-flex justify-between" v-else>
-        <router-link class="mr-5" :to="{name: 'Signup'}">Signup</router-link> 
+        <router-link :to="{name: 'Signup'}">Signup</router-link> 
         <t-modal ref="modal">
           <Login/>
         </t-modal>
-        <button @click="$refs.modal.show()" type="button">Login</button>
+        <button class="mr-10 ml-5" @click="$refs.modal.show()" type="button">Login</button>
         <!-- <router-link class="mr-5" :to="{name: 'Login'}">Login</router-link> -->
       </span>
     </div>
@@ -120,8 +120,7 @@ export default {
 
 <style>
   .nav {
-    background-color: #F3F3F3;
-    opacity: 0.7;
+    background-color: rgba(219, 219, 219, 0.7);
     width: 100%;
     height: 54px;
   }
@@ -143,7 +142,7 @@ export default {
   }
   .nav__logo {
     align-items: center;
-    margin-left: 20px
+    /* margin-left: 20px */
   }
   .nav__menu {
     width: 20%;
@@ -151,6 +150,6 @@ export default {
   }
   .nav__account {
     align-items: center;
-    margin-right: 20px;
+    /* margin-right: 20px; */
   }
 </style>
