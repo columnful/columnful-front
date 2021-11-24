@@ -57,7 +57,7 @@ const settings = {
         modal: 'bg-white shadow',
         // body: 'p-3',
         header: 'border-gray-100',
-        footer: 'bg-gray-100',
+        footer: 'bg-white',
         close: 'bg-gray-100 text-gray-600 hover:bg-gray-200',
         closeIcon: 'fill-current h-4 w-4',
         overlayEnterClass: 'opacity-0',
