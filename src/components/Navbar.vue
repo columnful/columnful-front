@@ -12,7 +12,7 @@
       <router-link :to="{name: 'Reviews'}">REVIEWS</router-link> 
     </div>
 
-    <div class="nav__account">
+    <div class="nav__account d-flex">
       <span class="d-flex" v-if="isLogin">
 
         <t-dropdown>
@@ -119,6 +119,12 @@ export default {
 </script>
 
 <style>
+  .nav {
+    background-color: #F3F3F3;
+    opacity: 0.7;
+    width: 100%;
+    height: 54px;
+  }
   .nav__menu a {
     align-items: center;
     /* font-weight: bold; */
@@ -137,9 +143,14 @@ export default {
   }
   .nav__logo {
     align-items: center;
+    margin-left: 20px
   }
   .nav__menu {
     width: 20%;
     align-items: center;
+  }
+  .nav__account {
+    align-items: center;
+    margin-right: 20px;
   }
 </style>
