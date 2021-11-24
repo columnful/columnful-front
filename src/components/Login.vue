@@ -1,22 +1,14 @@
 <template>
   <div class="login">
+
+    <form class="justify-content-center mt-12" @submit.prevent="login">
       
-    <div class="d-flex justify-content-between align-items-stretch mb-2" style="width: 100%;">
-      
-      <h5 class="mb-0">로그인</h5>
-      <p style="color: rgba(213,213,213,0.7); font-size: 14px" class="mb-0">아직 저희 회원이 아니신가요?</p>
-    
-    </div>
-    
-    <form class="justify-content-center mt-1" @submit.prevent="login">
-      
-      <input class="form-control mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="아이디를 입력해주세요" type="text" id="username" v-model="credentials.username">
+      <input class="form-control mb-2 mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="아이디를 입력해주세요" type="text" id="username" v-model="credentials.username">
       <input class="form-control mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="비밀번호를 입력해주세요" type="password" id="password" v-model="credentials.password" @keypress.enter="login">
       
-      <button @click="login" type="button" class="btn btn-danger mt-3" style="width: 100%;">로그인</button>
+      <button @click="login" type="button" class="btn btn-danger mt-3" style="width: 100%;">LOG IN</button>
     </form>
-  
-        
+
   </div>
 </template>
 
@@ -46,6 +38,7 @@ export default {
           this.$store.dispatch('getMoviesMove')
           this.$emit('login')
           this.$router.push({ name: 'Home' })
+          this.$router.go()
         })
         .catch(err => {
           console.log(err)
@@ -67,9 +60,8 @@ export default {
 </script>
 
 <style>
-.login {
+/* .login {
   color: #000000;
-  /* #f4f4f4; */
   display: flex;
   flex-direction: column;
   -webkit-box-pack: center;
@@ -81,7 +73,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-}
+} */
 input::placeholder {
   color: lightgrey !important;
 }

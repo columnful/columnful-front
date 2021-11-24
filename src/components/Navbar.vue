@@ -78,10 +78,57 @@
 
       <span class="nav__account-none d-flex justify-between" v-else>
         <router-link :to="{name: 'Signup'}">Signup</router-link> 
-        <t-modal ref="modal">
-          <Login/>
+        <!-- <t-modal ref="modal">
+          <template v-slot:header>
+            this is head
+          </template>
+          <p>how to write?</p>
+          <p>is it working?</p>
+          <template v-slot:body>
+            <Login/>
+          </template>
+          <template v-slot:footer>
+            this is footer
+          </template>
+        </t-modal> -->
+        <!-- <button class="mr-10 ml-5" @click="$refs.modalName.openModal()" type="button">Login</button> -->
+        <t-modal v-model="showModal">
+          <template v-slot:header>
+            <p class="p-5">Welcome to Columnful World!</p>
+            <hr>
+          </template>
+          <div class="content">
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+          
+            <div class="d-flex">
+              <Login/>
+            </div>
+
+          </div>
+          <!-- <Login/> -->
+          <template v-slot:footer>
+            <hr>
+            <p class="p-5">Don't you have an account?</p>
+          </template>
         </t-modal>
-        <button class="mr-10 ml-5" @click="$refs.modal.show()" type="button">Login</button>
+        <button class="mr-10 ml-5" @click="showModal=true" type="button">Login</button>
+        
+        <!-- <LoginModal ref="modalName">
+          <template v-slot:header>
+            <h1>DETAILS</h1>
+          </template>
+
+          <template v-slot:body>
+            <div>
+
+            <Login/>
+            </div>
+          </template>
+
+          <template v-slot:footer>
+            this is footer
+          </template>
+        </LoginModal> -->
         <!-- <router-link class="mr-5" :to="{name: 'Login'}">Login</router-link> -->
       </span>
     </div>
@@ -93,6 +140,7 @@
 
 <script>
 import Login from '@/components/Login'
+// import LoginModal from '@/components/LoginModal'
 import VueStickyDirective from 'vue-sticky-directive'
 
 export default {
@@ -102,12 +150,13 @@ export default {
   },
   components: {
     Login,
+    // LoginModal,
   },
   data: function () {
     return {
       isLogin: false,
       username: '',
-      shouldStick: false
+      showModal: false
     }
   },
   created: function () {
@@ -164,5 +213,8 @@ export default {
   .nav__account {
     align-items: center;
     /* margin-right: 20px; */
+  }
+  .content {
+    background-color: rgb(247, 247, 247);
   }
 </style>
