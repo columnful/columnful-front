@@ -16,7 +16,7 @@
           :key="movie.id"> 
 
           <!-- modal 연결 방법 다시 생각하기 -->
-          <div v-modal.movie-detail @click="selectMovie(movie.id)">
+          <div @click="[selectMovie(movie.id), showDetail=true]">
             <template v-if="movie.poster_path.slice(0,4) == 'http'">
               <img width="100%" class="movie__poster" :src="movie.poster_path" alt="">
             </template>
@@ -35,7 +35,7 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel"
-import axios from "axios"
+// import axios from "axios"
 
 
 const URL_PREFIX = 'https://image.tmdb.org/t/p/w500'
@@ -62,27 +62,35 @@ export default {
       URL_PREFIX,
       showLoading: true,
       movieDetail: Object,
+      movie_id: "",
     }
   },
   methods: {
-    getMovieData: function () {
-      axios.get(`http://127.0.0.1:8000/movies/${this.movie.movie_id}`)
-        .then((res) => {
-          console.log(this.movie.movie_id)
-          console.log(res.data)
-          this.movieDetail = res.data
-        })
-        .catch(err => console.log(err))
-    },
-    trueModal: function () {
-      if (this.isLogin === true) {
-        this.$store.dispatch('trueModal')
-      }
-    },
+    // getMovieData: function () {
+    //   axios.get(`http://127.0.0.1:8000/movies/${this.movie.movie_id}`)
+    //     .then((res) => {
+    //       console.log(this.movie.movie_id)
+    //       console.log(res.data)
+    //       this.movieDetail = res.data
+    //     })
+    //     .catch(err => console.log(err))
+    // },
+    // trueModal: function () {
+    //   if (this.isLogin === true) {
+    //     this.$store.dispatch('trueModal')
+    //   }
+    // },
     selectMovie: function (movieId) {
-      this.$store.dispatch('selectMovie', movieId)
-      console.log('func.selectMovie_done')
-    },
+      this.movie_id = movieId
+      this.$emit('selectedMovie', this.movie_id)
+      console.log(this.movie_id)
+    } 
+
+    // reference
+    // selectMovie: function (movieId) {
+    //   this.$store.dispatch('selectMovie', movieId)
+    //   console.log('func.selectMovie_done')
+    // },
   },
 }
 </script>

@@ -1,17 +1,26 @@
 <template>
   <div>
-    <modal ref="modalName">
-      <template v-slot:header>
-        <h1>DETAILS</h1>
-      </template>
+    <!-- @click="$refs.modalName.openModal() -->
+    <modal v-model="showDetail" class="datail__modal">
+      <div class="modal__dialog rounded">
+        <MovieModal 
+        :selectedMovieID="selectedmovie_id"
+        :backdrop_path="selectedMovie.backdrop_path"
+        :genres="selectedMovie.genres"
+        :original_title="selectedMovie.original_title"
+        :overview="selectedMovie.overview"
+        :release_date="selectedMovie.release_date"
+        :runtime="selectedMovie.runtime"
+        :vote_average="selectedMovie.vote_average"
+         />
+        <!-- <p> {{ selectedMovie.original_title }} </p>
+        <br><br><br><br><br><br><br><br><br><br><br><br> -->
+      </div>
 
-      <template v-slot:body>
-        <Content/>
-      </template>
 
-      <template v-slot:footer>
-      </template>
     </modal>
+
+
     <carousel :per-page="1" class="banner_list"
       paginationActiveColor="#e01a31"
       paginationColor="#999"
@@ -28,6 +37,7 @@
         :movies="popular_movies"
         group_title="POPULAR"
         class="mt-5"
+        @selectedMovie="selectedMovieDetail"
       />
       <br><br>
 
@@ -35,6 +45,7 @@
         :movies="toprated_movies"
         group_title="TOP RATED"
         class="mt-5"
+        @selectedMovie="selectedMovieDetail"
       />
       <br><br>
 
@@ -42,6 +53,7 @@
         :movies="nowplaying_movies"
         group_title="NOW PLAYING"
         class="mt-5"
+        @selectedMovie="selectedMovieDetail"
       />
 
     </div>
@@ -52,8 +64,8 @@
 require('dotenv').config()
 import { Carousel, Slide } from "vue-carousel"
 import MovieCarousel from '@/components/MovieCarousel'
-import Modal from "@/components/Modal"
-import Content from "@/components/Content"
+import MovieModal from '@/components/MovieModal'
+
 import axios from 'axios'
 
 const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
@@ -67,6 +79,9 @@ export default {
       nowplaying_movies: [],
       upcoming_movies: [],
       recommend_movie_user: [],
+      showDetail: false,
+      selectedMovie: [],
+      selectedmovie_id: "",
     }
   },
   props: {
@@ -75,11 +90,10 @@ export default {
     },
   },
   components: {
-    Modal,
-    Content,
     MovieCarousel,
     Carousel,
     Slide,
+    MovieModal,
   },
   created: function () {
     axios.get('https://api.themoviedb.org/3/movie/popular', {
@@ -148,6 +162,26 @@ export default {
     //     console.log(err)
     //   })
   },
+  methods: {
+    selectedMovieDetail(movie_id) {
+      this.selectedmovie_id = movie_id
+      this.showDetail=true
+      console.log(this.selectedmovie_id)
+      axios.get('https://api.themoviedb.org/3/movie/' + movie_id, {
+        params: {
+          api_key: TMDB_API_KEY,
+          language: "ko-KR",
+          region: "kr"
+        }
+      })
+      .then((res) =>{
+        this.selectedMovie = res.data
+        console.log(res.data)
+        this.showDetail=true
+      })
+      .catch(err => console.log(err))
+      }
+  }
   // methods: {
   //   newAlert: function () {
   //     if (this.isLogin === false) {
@@ -173,5 +207,21 @@ export default {
     font: bold;
     text-align: left;
   }
-
+  .detail__modal {
+    width:80% !important ;
+  }
+  modal__dialog {
+    position: relative;
+    width: 80% !important;
+    height: 90% !important;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    @media screen and (max-width: 992px) {
+      width: 90%;
+    }
+  }
 </style>
