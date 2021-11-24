@@ -94,7 +94,7 @@
             <hr>
             <div class="d-flex p-5">
             <p class="mr-2">Already a Columnfuller?</p>
-            <button><span style="font-weight:bold;">LOG IN</span></button>
+            <button @click="loginModal()"><span style="font-weight:bold;">LOG IN</span></button>
             </div>
           </template>
         </t-modal>
@@ -168,17 +168,12 @@ export default {
       this.$router.push({ name: 'Login' })
     },
     loginModal: function() {
-      this.$router.go()
-      .then(this.showLogin=true)
+      this.showSignup=false
+      this.showLogin=true
     },
     signupModal: function() {
-      this.$router.go()
-      setTimeout(() => {
-        this.showSignup=true
-        console.log('2')
-      },30000)
-      // .then(this.showSignup=true)
- 
+      this.showLogin=false
+      this.showSignup=true
     }
   },
 }
