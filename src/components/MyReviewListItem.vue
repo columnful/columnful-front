@@ -1,75 +1,66 @@
 <template>
-    <div class="carrd" width="286px">
-      <div class="card"
-        width="286px" height="409.55px"
-        v-for="(movie, idx) in movies"
-        :key="idx">
-      <!-- <v-card 
-        class="movie_card"
-        width="286px" height="409.55px"
-        v-for="(movie, idx) in movies"
-        :key="idx"> -->
-        <!-- <div v-b-modal.modal-scrollable @click="selectMovie(movie.id)"> -->
-          <template v-if="movie.poster_path.slice(0,4) == 'http'">
-            <img width="100%" :src="movie.poster_path" alt="">
-          </template>
+  <div class="movies">
+    <div class="movies__slide">
+      <!-- <h3 class="d-flex justify-content-start font-weight-bold" style="color: black">{{ group_title }}</h3> -->
+      <carousel
+        :navigationEnabled="true"
+        :navigation-next-label="nextLabel"
+        :navigation-prev-label="prevLabel"
+        :paginationEnabled="false"
+        :perPageCustom="[[0, 1],[650,2],[1020,3],[1340,4],[1660,5],[2000,6],[2350,7],[2800, 8]]">
 
-          <template v-else>
-            <img width="100%" :src="'https://image.tmdb.org/t/p/w500'+movie.poster_path" alt="">
-          </template>
-        <!-- </div> -->
-      <!-- </v-card> -->
-      </div>
-      </div>
+        <!-- <button class="btn btn--primary mx-auto" @click="$refs.modalName.openModal()">Open modal</button> -->
+        <slide
+          class="mt-3"
+          v-for="Review in Reviews"
+          :key="Review.id"> 
+          {{ Review }}
+          <!-- modal 연결 방법 다시 생각하기 -->
+          <!-- <div v-modal.movie-detail @click="selectMovie(movie.id)">
+            <template v-if="movie.poster_path.slice(0,4) == 'http'">
+              <img width="100%" class="movie__poster" :src="movie.poster_path" alt="">
+            </template>
 
-      <!-- <div>
-      <v-card 
-        class="movie_card"
-        @mouseover="active = !active"
-        width="400px" height="620px"
-        v-for="(movie, idx) in movies"
-        :key="idx">
-          <template v-if="movie.poster_path.slice(0,4) == 'http'">
-            <img width="100%" :src="movie.poster_path" alt="">
-          </template>
+            <template v-else>
+              <img width="100%" class="movie__poster" :src="'https://image.tmdb.org/t/p/w500'+movie.poster_path" alt="">
+            </template>
+          </div> -->
 
-          <template v-else>
-            <img width="100%" :src="'https://image.tmdb.org/t/p/w500'+movie.poster_path" alt="">
-          </template>
-        <v-card-text>
-          <div class="content_genres">
-            <span 
-              class="content_genre"
-              v-for="genre in movie.genre_ids"
-              :key="genre.id">
-              {{ genre |  findGenre}}
-            </span>
-          </div> 
-        </v-card-text>
-        <v-card-title> {{movie.title}} </v-card-title>
-      </v-card>
-      </div> -->
+        </slide>
+
+      </carousel>
+    </div>
+  </div>
 </template>
 
 <script>
-// import { Carousel, Slide } from "vue-carousel"
+import { Carousel, Slide } from "vue-carousel"
 import axios from "axios"
 
-// const URL_PREFIX = 'https://image.tmdb.org/t/p/w500'
+
+const URL_PREFIX = 'https://image.tmdb.org/t/p/w500'
 
 export default {
-  name:"MyReviewListItem",
-  props: {
-    movies: {
-      type: Array
-    },
-    isLogin: {
-      type: Boolean
-    }
+  name: "MyReviewListItem",
+  components: {
+    Carousel,
+    Slide,
   },
+  props: ['Reviews'],
+  // props: {
+  //   movies: {
+  //     type: Array
+  //   },
+  //   group_title: {
+  //     type: String
+  //   },
+  // },
   data () {
     return {
       showModal: false,
+      prevLabel: '<i class="fas fa-angle-left" style="color:#ffffff;"></i>',
+      nextLabel: '<i class="fas fa-angle-right" style="color:#ffffff;"></i>',
+      URL_PREFIX,
       showLoading: true,
       movieDetail: Object,
     }
@@ -78,7 +69,8 @@ export default {
     getMovieData: function () {
       axios.get(`http://127.0.0.1:8000/movies/${this.movie.movie_id}`)
         .then((res) => {
-          // console.log(res.data)
+          console.log(this.movie.movie_id)
+          console.log(res.data)
           this.movieDetail = res.data
         })
         .catch(err => console.log(err))
@@ -90,56 +82,37 @@ export default {
     },
     selectMovie: function (movieId) {
       this.$store.dispatch('selectMovie', movieId)
-    },
-  },
-  filters: {
-    findGenre: function (value) {
-      if (value === 12) {
-        return '모험'
-      } else if (value === 14) {
-        return '판타지'
-      } else if (value === 14) {
-        return '애니메이션'
-      } else if (value === 16) {
-        return '드라마'
-      } else if (value === 18) {
-        return '공포'
-      } else if (value === 27) {
-        return '액션'
-      } else if (value === 28) {
-        return '코미디'
-      } else if (value === 35) {
-        return '역사'
-      } else if (value === 36) {
-        return '서부'
-      } else if (value === 53) {
-        return '스릴러'
-      } else if (value === 80) {
-        return '범죄'
-      } else if (value === 99) {
-        return '다큐멘터리'
-      } else if (value === 878) {
-        return 'SF'
-      } else if (value === 9648) {
-        return '미스터리'
-      } else if (value === 10402) {
-        return '음악'
-      } else if (value === 10749) {
-        return '로맨스'
-      } else if (value === 10751) {
-        return '가족'
-      } else if (value === 10752) {
-        return '전쟁'
-      } else if (value === 10770) {
-        return 'TV 영화'
-      }
+      console.log('func.selectMovie_done')
     },
   },
 }
 </script>
 
 <style>
-  .movie_card{
-    box-shadow: 0px 2px 2px #F3F3F3;
+  .movie__poster:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  }
+  .movies__slide {
+    width: 90%;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+  }
+  .movies {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+  }
+  .movie__poster {
+    border-radius: 15px;
+    transition: 0.5s;
+    height: 409.55px;
+    margin-bottom: 20px;
+    width: 286px;
+  }
+  .movie__poster:hover {
+    transform: scale(1.1);
+    cursor: pointer;
   }
 </style>
