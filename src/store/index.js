@@ -8,13 +8,20 @@ export default new Vuex.Store({
   state: {
     reviews: [],
     username: '',
+    selectedMovie: 0
   },
   mutations: {
     getUsername (state, username) {
       state.username = username
+    },
+    SELECT_MOVIE: function (state, payload) {
+      state.selectedMovie = payload
     }
   },
   actions: {
+    selectMovie: function ({commit}, movieId) {
+      commit('SELECT_MOVIE', movieId)
+    }
   },
   modules: {
   },

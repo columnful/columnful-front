@@ -6,7 +6,7 @@
       <div class="modal__dialog">
         <div class="modal__header">
           <slot name="header"/>
-          <button type="button" class="modal__close" @click="closeModal()">CLOSE</button>
+          <button type="button" class="modal__close mx-6" @click="closeModal()">CLOSE</button>
         </div>
 
         <div class="modal__body">
@@ -65,7 +65,8 @@ export default {
   }
   &__dialog {
     position: relative;
-    width: 600px;
+    width: 80%;
+    height: 90%;
     background-color: #ffffff;
     border-radius: 5px;
     margin: 50px auto;

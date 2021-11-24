@@ -1,6 +1,18 @@
 <template>
   <div>
-    <carousel v-model=index :per-page="1" class="banner_list"
+    <modal ref="modalName">
+      <template v-slot:header>
+        <h1>DETAILS</h1>
+      </template>
+
+      <template v-slot:body>
+        <Content/>
+      </template>
+
+      <template v-slot:footer>
+      </template>
+    </modal>
+    <carousel :per-page="1" class="banner_list"
       paginationActiveColor="#e01a31"
       paginationColor="#999"
       :paginationPadding=3>
@@ -32,20 +44,6 @@
         class="mt-5"
       />
 
-      <!-- <h2>UPCOMING</h2>
-      <MovieCarousel
-        :movies="upcoming_movies"
-        class="mt-5"
-      /> -->
-
-      <!-- <MovieCard
-        :isLogin="isLogin"
-        :movies="recommend_movie_user"
-        @click.native="newAlert"
-        group_title="RECOMMENDATION"
-        class="mt-5"
-      /> -->
-
     </div>
   </div>
 </template>
@@ -54,6 +52,8 @@
 require('dotenv').config()
 import { Carousel, Slide } from "vue-carousel"
 import MovieCarousel from '@/components/MovieCarousel'
+import Modal from "@/components/Modal"
+import Content from "@/components/Content"
 import axios from 'axios'
 
 const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
@@ -75,10 +75,11 @@ export default {
     },
   },
   components: {
-    // MovieCard,
+    Modal,
+    Content,
     MovieCarousel,
     Carousel,
-    Slide
+    Slide,
   },
   created: function () {
     axios.get('https://api.themoviedb.org/3/movie/popular', {
@@ -90,7 +91,7 @@ export default {
     })
     .then((res) =>{
       this.popular_movies = res.data.results
-      console.log(res.data)
+      // console.log(res.data)
     })
     .catch(err => console.log(err))
 
@@ -127,7 +128,7 @@ export default {
     })
     .then((res) =>{
       this.upcoming_movies = res.data.results
-      console.log(res.data)
+      // console.log(res.data)
     })
     .catch(err => console.log(err))
 
