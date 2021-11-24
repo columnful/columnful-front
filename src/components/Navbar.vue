@@ -1,7 +1,11 @@
 <template>
-  <div class="nav d-flex justify-between">
+  <div data-v-sticky-container>
 
-    <div class="nav__logo d-flex mx-10">
+  <div 
+    v-vue-sticky-directive="{topSpacing:0}"
+    class="sticky nav d-flex justify-between">
+
+    <div class="nav__logo d-flex ml-10">
       <img class="nav__logo-img" src="../assets/images/logo/clarity_star-solid.png">
     </div>
 
@@ -15,7 +19,7 @@
     <div class="nav__account d-flex">
       <span class="d-flex" v-if="isLogin">
 
-        <t-dropdown>
+        <t-dropdown class="mr-9">
           <div
             slot="trigger"
             slot-scope="{
@@ -28,7 +32,7 @@
           >
             <button
               id="user-menu"
-              class="flex items-center pr-3 text-sm text-gray-700 transition duration-150 ease-in-out bg-gray-200 border-2 border-gray-200 rounded-full focus:outline-none focus:shadow-solid"
+              class="flex items-center pr-3 text-sm text-gray-700 transition duration-150 ease-in-out border-2 border-gray-200 rounded-full focus:outline-none focus:shadow-solid"
               :class="{ 'border-gray-300 bg-gray-300 text-white ': isShown }"
               aria-label="User menu"
               aria-haspopup="true"
@@ -83,14 +87,19 @@
     </div>
     <!-- <router-view @login="isLogin=true"/> -->
   </div>
+  </div>
   
 </template>
 
 <script>
 import Login from '@/components/Login'
+import VueStickyDirective from 'vue-sticky-directive'
 
 export default {
   name: "Navbar",
+  directives: {
+    VueStickyDirective
+  },
   components: {
     Login,
   },
@@ -98,6 +107,7 @@ export default {
     return {
       isLogin: false,
       username: '',
+      shouldStick: false
     }
   },
   created: function () {
@@ -119,6 +129,9 @@ export default {
 </script>
 
 <style>
+  #user-menu {
+    background-color: whitesmoke;
+  }
   .nav {
     background-color: rgba(219, 219, 219, 0.7);
     width: 100%;
@@ -142,7 +155,7 @@ export default {
   }
   .nav__logo {
     align-items: center;
-    /* margin-left: 20px */
+    margin-left: 20px
   }
   .nav__menu {
     width: 20%;

@@ -9,6 +9,8 @@ import VueTailwind from 'vue-tailwind'
 import TDropdown from 'vue-tailwind/dist/t-dropdown';
 import TModal from 'vue-tailwind/dist/t-modal'
 
+import Sticky from 'vue-sticky-directive'
+
 const settings = {
   't-dropdown': {
     component: TDropdown,
@@ -87,6 +89,7 @@ const settings = {
 
 Vue.config.productionTip = false
 Vue.use(VueTailwind, settings)
+Vue.use(Sticky)
 
 new Vue({
   store,

@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-      <Header/>
-      <Navbar/>
+  <div id="app" sticky-container>
+    <Header/>
+    <Navbar/>
 
     <router-view @login="isLogin=true"/>
   </div>
@@ -15,7 +15,7 @@ export default {
   name: 'App',
   components: {
     Navbar,
-    Header
+    Header,
   },
 }
 </script>
