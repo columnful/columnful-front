@@ -77,15 +77,54 @@
       </span>
 
       <span class="nav__account-none d-flex justify-between" v-else>
-        <router-link :to="{name: 'Signup'}">Signup</router-link> 
-        <t-modal ref="modal">
-          <Login/>
+        <t-modal v-model="showSignup">
+          <template v-slot:header>
+            <p class="p-5">Welcome to Columnful World!</p>
+            <hr>
+
+          </template>
+          <div class="content">
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+            <div class="d-flex">
+              <Signup/>
+            </div>
+          </div>
+
+          <template v-slot:footer>
+            <hr>
+            <div class="d-flex p-5">
+            <p class="mr-2">Already a Columnfuller?</p>
+            <button @click="loginModal()"><span style="font-weight:bold;">LOG IN</span></button>
+            </div>
+          </template>
         </t-modal>
-        <button class="mr-10 ml-5" @click="$refs.modal.show()" type="button">Login</button>
-        <!-- <router-link class="mr-5" :to="{name: 'Login'}">Login</router-link> -->
+        <button @click="showSignup=true" type="button">SignUp</button>
+      
+        <t-modal v-model="showLogin">
+          <template v-slot:header>
+            <p class="p-5">Welcome to Columnful World!</p>
+            <hr>
+
+          </template>
+          <div class="content">
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+            <div class="d-flex">
+              <Login/>
+            </div>
+          </div>
+
+          <template v-slot:footer>
+            <hr>
+            <div class="content d-flex p-5">
+              <p class="mr-2">New to Columnful?</p>
+              <button @click="signupModal()" type="button"> <span style="font-weight:bold;">SIGN UP</span></button>
+            </div>
+              
+          </template>
+        </t-modal>
+        <button class="mr-10 ml-5" @click="showLogin=true" type="button">LogIn</button>
       </span>
     </div>
-    <!-- <router-view @login="isLogin=true"/> -->
   </div>
   </div>
   
@@ -93,6 +132,8 @@
 
 <script>
 import Login from '@/components/Login'
+import Signup from '@/components/Signup'
+
 import VueStickyDirective from 'vue-sticky-directive'
 
 export default {
@@ -102,12 +143,14 @@ export default {
   },
   components: {
     Login,
+    Signup,
   },
   data: function () {
     return {
       isLogin: false,
       username: '',
-      shouldStick: false
+      showLogin: false,
+      showSignup: false,
     }
   },
   created: function () {
@@ -123,6 +166,14 @@ export default {
       this.isLogin = false
       localStorage.removeItem('jwt')
       this.$router.push({ name: 'Login' })
+    },
+    loginModal: function() {
+      this.showSignup=false
+      this.showLogin=true
+    },
+    signupModal: function() {
+      this.showLogin=false
+      this.showSignup=true
     }
   },
 }
@@ -164,5 +215,8 @@ export default {
   .nav__account {
     align-items: center;
     /* margin-right: 20px; */
+  }
+  .content {
+    background-color: whitesmoke;
   }
 </style>

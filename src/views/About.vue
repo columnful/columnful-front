@@ -26,7 +26,7 @@
 <script>
 import Modal from "@/components/Modal"
 import Content from "@/components/Content"
-import Login from '@/views/accounts/Login'
+import Login from '@/components/Login'
 // import axios from 'axios'
 
 // const YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search'
