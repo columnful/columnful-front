@@ -129,5 +129,6 @@ export default {
   }
   .nav__menu {
     width: 20%;
+    align-items: center;
   }
 </style>
