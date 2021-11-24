@@ -8,7 +8,7 @@
         >
           <template  v-if="idx !== updateIdx">
             <span style="width: 5rem;" id="comment">
-              {{ comment.username }} |
+              <router-link :to="{name: 'Profile', params: { profileUsername: comment.username }}">{{ comment.username }}</router-link> |
             </span>
               {{ comment.content }}
             <span>
