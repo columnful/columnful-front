@@ -15,31 +15,8 @@ export default {
   components: {
     Navbar
   },
-  data: function () {
-    return {
-      isLogin: false,
-      username: '',
-    }
-  },
-  created: function () {
-    const token = localStorage.getItem('jwt')
-    if (token) {
-      this.isLogin = true
-      this.username = localStorage.getItem('username')
-    }
-  },
-  
-  methods: {
-    logout: function () {
-      this.isLogin = false
-      localStorage.removeItem('jwt')
-      this.$router.push({ name: 'Login' })
-    }
-  },
 }
-
 </script>
-
 
 
 <style>
@@ -55,12 +32,4 @@ export default {
     padding: 15px;
   }
 
-  /* #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  } */
-
-  #nav a.router-link-exact-active {
-    color: #42b983;
-  }
 </style>

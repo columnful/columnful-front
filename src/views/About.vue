@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-
+    <div> 
+      <t-modal ref="modal">hello world</t-modal>
+      <button @click="$refs.modal.show()" type="button">Show modal</button>
+      <button @click="$refs.modal.hide()" type="button">Hide modal</button>
+    </div>
     <button class="btn btn--primary mx-auto" @click="$refs.modalName.openModal()">Open modal</button>
     
     <modal ref="modalName">
@@ -10,6 +14,7 @@
 
       <template v-slot:body>
         <Content/>
+        <Login/>
       </template>
 
       <template v-slot:footer>
@@ -21,6 +26,7 @@
 <script>
 import Modal from "@/components/Modal"
 import Content from "@/components/Content"
+import Login from '@/views/accounts/Login'
 // import axios from 'axios'
 
 // const YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search'
@@ -32,7 +38,8 @@ export default {
   name: "About",
   components: {
     Modal,
-    Content
+    Content,
+    Login
   },
   // data: function() {
   //   return {

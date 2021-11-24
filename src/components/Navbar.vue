@@ -74,15 +74,26 @@
 
       <span class="nav__account-none d-flex justify-between" v-else>
         <router-link class="mr-5" :to="{name: 'Signup'}">Signup</router-link> 
-        <router-link class="mr-5" :to="{name: 'Login'}">Login</router-link>
+        <t-modal ref="modal">
+          <Login/>
+        </t-modal>
+        <button @click="$refs.modal.show()" type="button">Login</button>
+        <!-- <router-link class="mr-5" :to="{name: 'Login'}">Login</router-link> -->
       </span>
     </div>
+    <!-- <router-view @login="isLogin=true"/> -->
   </div>
+  
 </template>
 
 <script>
+import Login from '@/components/Login'
+
 export default {
   name: "Navbar",
+  components: {
+    Login,
+  },
   data: function () {
     return {
       isLogin: false,
