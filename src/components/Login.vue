@@ -44,10 +44,6 @@ export default {
           // vuex store 사용하여 로그인한 username을 전역에서 사용할 수 있도록 함 
           this.$store.commit('getUsername', username)
           this.$store.dispatch('getMoviesMove')
-<<<<<<< HEAD
-          // console.log(this.$store.state.popular_movies)
-=======
->>>>>>> 69020702fdd82e4af4915058e37224b0baceb9af
           this.$emit('login')
           this.$router.push({ name: 'Home' })
         })

@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import axios from 'axios'
 
-
 Vue.use(Vuex)
 const TMDB_API_URL_POPULAR = 'https://api.themoviedb.org/3/movie/popular'
 // const TMDB_API_URL_TOP_RATED = 'https://api.themoviedb.org/3/movie/top_rated'
@@ -16,6 +15,8 @@ export default new Vuex.Store({
     username: '',
     popular_movies: [],
     movies_title: [],
+    selectedMovie: 0
+
   },
   mutations: {
     getUsername (state, username) {
@@ -31,9 +32,15 @@ export default new Vuex.Store({
     },
     removeMoviesTitle (state) {
       state.movies_title = []
+    },
+    SELECT_MOVIE: function (state, payload) {
+      state.selectedMovie = payload
     }
   },
   actions: {
+    selectMovie: function ({commit}, movieId) {
+      commit('SELECT_MOVIE', movieId)
+    },
     getMoviesMove (context) {
       axios.get(TMDB_API_URL_POPULAR, {
         params: {
@@ -49,7 +56,6 @@ export default new Vuex.Store({
       })
       .catch(err => console.log(err))
     }
-
   },
   modules: {
   },
