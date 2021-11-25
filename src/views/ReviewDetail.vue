@@ -11,9 +11,21 @@
       <hr>
       <ul>
         <li>
-          <p style="white-space: pre-line; text-align: left; margin-left: 10px; font-size: 18px; padding-top: 20px; padding-bottom: 40px; line-height: 2;">
+          <div style="white-space: pre-line; text-align: left; margin-left: 10px; font-size: 18px; padding-top: 20px; padding-bottom: 40px; line-height: 2;">
+            <div @click="[selectMovie(movie.id), showMovieModal()]">
+              <template v-if="review.poster_path.slice(0,4) == 'http'" style="text-align: center;">
+                <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
+                  <img width="100%" class="movie__poster" :src="review.poster_path" alt="">
+                </router-link>
+              </template>
+              <template v-else style="text-align: center;">
+                <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
+                  <img width="100%" class="movie__poster" :src="'https://image.tmdb.org/t/p/w500'+review.poster_path" alt="">
+                </router-link>
+              </template>
             {{ review.content }}
-          </p>
+            </div>
+          </div>
         </li>
       </ul>
       <div v-if="review.username === this.username" style="text-align: right; width: 800px">
