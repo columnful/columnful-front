@@ -1,9 +1,9 @@
 <template>
   <div>
+    <div class="video-container">
+      <iframe :src="youtubeURL" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 
-  <div class="detail__bg-img" :style="{'background-image': 'url(https://image.tmdb.org/t/p/original' + backdrop_path + ')'}">
-    {{backdrop_path}}
-  </div>
   </div>
 </template>
 
@@ -20,8 +20,11 @@ export default {
     release_date: [],
     runtime: [],
     vote_average: [],
+    youtubeURL: [],
   },
+
 }
+
 </script>
 
 <style>

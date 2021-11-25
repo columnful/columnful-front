@@ -1,8 +1,14 @@
 <template>
   <div>
     <!-- @click="$refs.modalName.openModal() -->
-    <modal v-model="showDetail" class="datail__modal">
-      <div class="modal__dialog rounded">
+    <modal ref="modalName" :backdrop_path="selectedMovie.backdrop_path">
+      <template v-slot:header>
+        <h1>DETAILS</h1>
+      </template>
+
+      <template v-slot:body>
+   
+      <div>
         <MovieModal 
         :selectedMovieID="selectedmovie_id"
         :backdrop_path="selectedMovie.backdrop_path"
@@ -12,12 +18,15 @@
         :release_date="selectedMovie.release_date"
         :runtime="selectedMovie.runtime"
         :vote_average="selectedMovie.vote_average"
+        :youtubeURL="youtubeURL"
          />
         <!-- <p> {{ selectedMovie.original_title }} </p>
         <br><br><br><br><br><br><br><br><br><br><br><br> -->
       </div>
+      </template>
 
-
+      <template v-slot:footer>
+      </template>
     </modal>
 
 
@@ -38,6 +47,7 @@
         group_title="POPULAR"
         class="mt-5"
         @selectedMovie="selectedMovieDetail"
+        @showMovieModal="$refs.modalName.openModal()"
       />
       <br><br>
 
@@ -46,6 +56,7 @@
         group_title="TOP RATED"
         class="mt-5"
         @selectedMovie="selectedMovieDetail"
+        @showMovieModal="$refs.modalName.openModal()"
       />
       <br><br>
 
@@ -54,6 +65,7 @@
         group_title="NOW PLAYING"
         class="mt-5"
         @selectedMovie="selectedMovieDetail"
+        @showMovieModal="$refs.modalName.openModal()"
       />
 
     </div>
@@ -65,6 +77,7 @@ require('dotenv').config()
 import { Carousel, Slide } from "vue-carousel"
 import MovieCarousel from '@/components/MovieCarousel'
 import MovieModal from '@/components/MovieModal'
+import Modal from '@/components/Modal'
 
 import axios from 'axios'
 
@@ -82,6 +95,8 @@ export default {
       showDetail: false,
       selectedMovie: [],
       selectedmovie_id: "",
+      videos: [],
+      youtubeURL: "",
     }
   },
   props: {
@@ -94,6 +109,7 @@ export default {
     Carousel,
     Slide,
     MovieModal,
+    Modal,
   },
   created: function () {
     axios.get('https://api.themoviedb.org/3/movie/popular', {
@@ -180,6 +196,20 @@ export default {
         this.showDetail=true
       })
       .catch(err => console.log(err))
+
+      axios.get('https://api.themoviedb.org/3/movie/'+ movie_id +'/videos', {
+      params: {
+        api_key: TMDB_API_KEY,
+        language: "ko-KR"
+      }
+    })
+    .then((res) => {
+      this.videos = res.data.results
+      console.log(this.videos)
+      this.youtubeURL = `https://www.youtube.com/embed/${this.videos[0].key}`
+      console.log(this.youtubeURL)
+    })
+    .catch(err => console.log(err))
       }
   }
   // methods: {
@@ -206,22 +236,5 @@ export default {
     /* float: left; */
     font: bold;
     text-align: left;
-  }
-  .detail__modal {
-    width:80% !important ;
-  }
-  modal__dialog {
-    position: relative;
-    width: 80% !important;
-    height: 90% !important;
-    background-color: #ffffff;
-    border-radius: 5px;
-    margin: 50px auto;
-    display: flex;
-    flex-direction: column;
-    z-index: 2;
-    @media screen and (max-width: 992px) {
-      width: 90%;
-    }
   }
 </style>

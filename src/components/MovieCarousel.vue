@@ -16,7 +16,7 @@
           :key="movie.id"> 
 
           <!-- modal 연결 방법 다시 생각하기 -->
-          <div @click="[selectMovie(movie.id), showDetail=true]">
+          <div @click="[selectMovie(movie.id), showMovieModal()]">
             <template v-if="movie.poster_path.slice(0,4) == 'http'">
               <img width="100%" class="movie__poster" :src="movie.poster_path" alt="">
             </template>
@@ -84,7 +84,11 @@ export default {
       this.movie_id = movieId
       this.$emit('selectedMovie', this.movie_id)
       console.log(this.movie_id)
-    } 
+    } ,
+    showMovieModal: function () {
+      const modalLink = '$refs.modalName.openModal()'
+      this.$emit('showMovieModal', modalLink)
+    }
 
     // reference
     // selectMovie: function (movieId) {
