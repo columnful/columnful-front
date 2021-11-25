@@ -2,7 +2,7 @@
   <div class="header d-flex justify-between">
     <div class="header__link d-flex ">
       <router-link class="header__link-menu ml-12" to="/about">ABOUT</router-link> 
-      <router-link class="header__link-menu ml-7" to="/about">CONTACT</router-link> 
+      <router-link class="header__link-menu ml-7" to="/contact">CONTACT</router-link> 
     </div>
 
     <div class="header__status d-flex justify-content-right">

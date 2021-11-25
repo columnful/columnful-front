@@ -18,22 +18,23 @@
             v-for="review in reviews"
             :key="review.id"
             > 
-
-            <!-- modal 연결 방법 다시 생각하기 -->
-            <div @click="[selectMovie(movie.id), showMovieModal()]">
-              <template v-if="review.poster_path.slice(0,4) == 'http'" style="text-align: center;">
+            <div>
+      
                 <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
-                  <img width="100%" class="movie__poster" :src="review.poster_path" alt="">
-                  {{ review.movie_title }}
+                  <img 
+                    v-if="review.poster_path"
+                    class="review__poster" 
+                    :src="'https://image.tmdb.org/t/p/originals'+review.poster_path">
+                  <div v-else> No Poster Image </div>
                 </router-link>
-              </template>
 
-              <template v-else style="text-align: center;">
-                <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
-                  <img width="100%" class="movie__poster" :src="'https://image.tmdb.org/t/p/w500'+review.poster_path" alt="">
+
+                <!-- <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
+                  <img width="100%" class="review__poster" :src="'https://image.tmdb.org/t/p/w500'+review.poster_path" alt="">
                   {{ review.movie_title }}
-                </router-link>
-              </template>
+                  {{ review.poster_path }} this is v-else
+                </router-link> -->
+
             </div>
 
           </slide>
@@ -83,7 +84,7 @@ export default {
     Slide,
   },
   created: function() {
-    // console.log(this.reviews)
+    console.log(this.reviews)
     // console.log(this.Reviews_movieTitle)
     // console.log(this.reviewsMovieTitle)
   },

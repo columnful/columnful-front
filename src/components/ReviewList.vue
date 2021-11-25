@@ -13,11 +13,11 @@
               <b>{{ review.title }}</b>
             </router-link>
             <p></p> 
-            <inline-box>
-              <div @click="[selectMovie(movie.id), showMovieModal()]">
-                <template v-if="review.poster_path.slice(0,4) == 'http'" style="text-align: center;">
+            <!-- <inline-box> -->
+              <div>
+                <template v-if="review.poster_path" style="text-align: center;">
                   <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
-                    <img width="100%" class="movie__poster" :src="review.poster_path" alt="">
+                    <img width="100%" class="movie__poster" :src="'https://image.tmdb.org/t/p/w500'+review.poster_path" alt="">
                     {{ review.movie_title }}
                   </router-link>
                 </template>
@@ -28,7 +28,7 @@
                   </router-link>
                 </template>
               </div>
-            </inline-box>
+            <!-- </inline-box> -->
             <div>
               <router-link :to="{name: 'Profile', params: { profileUsername: review.username }}">
                 <b>{{ review.username }}</b> 비평가  

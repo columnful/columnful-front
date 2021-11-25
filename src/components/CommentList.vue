@@ -16,10 +16,10 @@
               {{ comment.created_at | formatDate }}
               <i class="fas fa-hammer"></i>
               {{ comment.updated_at | formatDate }} -->
-              <template v-if="comment.username == username">
-                <button type="button" class="btn pull-right btn-light btn-sm" @click="commentIdx(comment, idx)">수정</button>
+              <template class="d-flex justify-end" v-if="comment.username == username">
+                <button type="button"  @click="commentIdx(comment, idx)">수정</button>
                 <button
-                type="button" class="btn pull-right btn-light btn-sm"
+                type="button"
                 @click="deleteComment(comment, idx)"
                 style="margin-left:5px">삭제</button>
               </template>

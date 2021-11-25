@@ -5,7 +5,9 @@
       <h1 class="font-weight-bolder text-center mb-0">New Review</h1>
       <br>
     </div>
-    <form class="container" @submit.prevent>
+    <div class="d-flex justify-center">
+
+    <form class="container content-center" @submit.prevent>
       <div class="form-group">
         <ul>
           <li>
@@ -55,6 +57,7 @@
       <button id="input-submit" class="w3-bar-item w3-button tablink " @click="createReview"><i class="fa fa-plane w3-margin-right"></i>투고하기</button>
     </form>
   </div>
+  </div>
 </template>
 
 <script>
@@ -90,6 +93,7 @@ export default {
     createReview: function () {
       const config = this.setToken()
       const isExist = this.$store.state.movies_title.includes(this.movieInput)
+      console.log(this.isExist)
       
       if (isExist) {
         axios.get(`http://127.0.0.1:8000/movies/movie_poster/${this.movieInput}/`, config)

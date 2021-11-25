@@ -3,6 +3,8 @@
     <br>
     <h1 class="font-weight-bolder text-center mb-0">Update Review</h1>
     <br>
+    <div class="d-flex justify-center">
+
     <form class="container" @submit.prevent>
       <div class="form-group">
         <ul>
@@ -44,6 +46,7 @@
       </div>
       <button id="input-submit" class="w3-bar-item w3-button tablink " @click="forUpdate"><i class="fa fa-plane w3-margin-right"></i>퇴고하기</button>
     </form>
+    </div>
   </div>
 </template>
 

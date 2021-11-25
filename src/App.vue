@@ -33,7 +33,7 @@ export default {
     color: #2c3e50;
     background-color: whitesmoke;
     width: 100% ;
-    height: 100% ;
+    /* height: 100% ; */
   }
 
   /* #nav {

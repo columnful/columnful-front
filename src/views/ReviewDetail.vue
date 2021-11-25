@@ -3,17 +3,18 @@
     <body
       :key="review.id"
       :review="review">
-      <div>
-        <h1>{{ review.title }}</h1>
-      </div>
-      비평가 : <router-link :to="{name: 'Profile', params: { profileUsername: review.username }}">{{ review.username }}</router-link>
-      영화 : {{ review.movie_title }}
-      <hr>
       <ul>
         <li>
-          <div style="white-space: pre-line; text-align: left; margin-left: 10px; font-size: 18px; padding-top: 20px; padding-bottom: 40px; line-height: 2;">
-            <div @click="[selectMovie(movie.id), showMovieModal()]">
-              <template v-if="review.poster_path.slice(0,4) == 'http'" style="text-align: center;">
+          <div style="white-space: pre-line; text-align: left; margin-left: 10px; font-size: 18px; padding-top: 20px; line-height: 2;">
+            <div style="line-height: 1;">
+              <p class="text-xs">{{ review.movie_title }}</p>
+              <p class="text-left text-m mt-1 mb-2" style="font-weight:bold;">{{ review.title }}</p>
+              <div class="mb-3 written"><I>written by. {{review.username}}</I></div>
+            </div>
+            <!-- 비평가 : <router-link :to="{name: 'Profile', params: { profileUsername: review.username }}">{{ review.username }}</router-link>  -->
+            <hr>
+            <div class="my-3">
+              <!-- <template v-if="review.poster_path == 'http'" style="text-align: center;">
                 <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
                   <img width="100%" class="movie__poster" :src="review.poster_path" alt="">
                 </router-link>
@@ -22,19 +23,23 @@
                 <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">
                   <img width="100%" class="movie__poster" :src="'https://image.tmdb.org/t/p/w500'+review.poster_path" alt="">
                 </router-link>
-              </template>
+              </template> -->
             {{ review.content }}
+            </div>
+            <hr>
+              <div class="content-center">
+                <div class="d-flex mt-3 mb-2 review-ud justify-end" v-if="review.username === this.username" style="text-align: right; width: 800px">
+                  <button class="mr-5" @click="updateReview">UPDATE  </button>
+                  <button on id="delete-review" class="mr-10" @click="deleteReview"><i class="fa fa-plane w3-margin-right"></i>DELETE</button>
+                </div>
+              </div>
+            <div class="reviewdetail_footer d-flex ">
             </div>
           </div>
         </li>
       </ul>
-      <div v-if="review.username === this.username" style="text-align: right; width: 800px">
-        <button class="w3-bar-item w3-button tablink" @click="updateReview">글 수정  </button>
-        <button on id="delete-review" class="w3-bar-item w3-button tablink" @click="deleteReview"><i class="fa fa-plane w3-margin-right"></i>글 삭제</button>
-      </div>
     </body>
     <hr>
-    <h4 class="font-weight-bolder text-center mb-0">댓글</h4>
     <comment-list
       :reviewId="reviewId"
       :newComment="newComment"
@@ -242,5 +247,11 @@ export default {
   }
   #commentForm {
     width: 85%;
+  }
+  .review-ud {
+    color: rgb(80, 80, 80) !important;
+  }
+  .written {
+    font-family: 'Times New Roman W05 Italic', Times, serif;
   }
 </style>

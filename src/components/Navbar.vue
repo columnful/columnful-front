@@ -11,7 +11,7 @@
 
     <div class="nav__menu d-flex justify-between align-center">
       <router-link to="/">HOME</router-link> 
-      <router-link to="/about">ABOUT</router-link> 
+      <router-link to="/about">HALL OF FAME</router-link> 
       <router-link :to="{name: 'Movie'}">MOVIE</router-link> 
       <router-link :to="{name: 'Reviews'}">REVIEWS</router-link> 
     </div>
@@ -165,7 +165,7 @@ export default {
     logout: function () {
       this.isLogin = false
       localStorage.removeItem('jwt')
-      this.$router.push({ name: 'Login' })
+      this.$router.push({ name: 'Home' })
     },
     loginModal: function() {
       this.showSignup=false
@@ -201,7 +201,7 @@ export default {
     font-weight: bold;
   }
   .nav__menu a.router-link-exact-active {
-    color: #E2AE7F !important;
+    color: #DAABAB !important;
     /* font-weight: bold; */
   }
   .nav__logo {
