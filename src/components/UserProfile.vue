@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :username="userData.username">
-      비평가 <b>{{ username }}</b>
+      <h1>비평가 <b>{{ username }}</b> 의 프로필</h1>
     </div>
 
   </div>

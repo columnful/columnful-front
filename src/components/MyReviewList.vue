@@ -1,11 +1,10 @@
 <template>
   <div>
-    <b>비평 목록</b>
     <br>
     <!--  -->
     <div class="movies">
       <div class="movies__slide">
-        <h3 class="d-flex justify-content-start font-weight-bold" style="color: black">비평목록</h3>
+        <h3 class="d-flex justify-content-start font-weight-bold" style="color: black"><b>비평목록</b></h3>
         <carousel
           :navigationEnabled="true"
           :navigation-next-label="nextLabel"
