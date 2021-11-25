@@ -94,6 +94,7 @@ export default {
       if (isExist) {
         axios.get(`http://127.0.0.1:8000/movies/movie_poster/${this.movieInput}/`, config)
           .then((res) => {
+            console.log(this.movieInput)
             this.posterPath = res.data[0].poster_path
             console.log(this.posterPath)
             const ReviewItem = {

@@ -28,15 +28,15 @@
     </modal>
 
 
-    <swiper class="swiper" :options="swiperOption"> 
-      <swiper-slide>
-        <img class="home_banner-img" src="../assets/homebanner/BANNER01.png" style="width:100%">
-      </swiper-slide> 
-      <swiper-slide>
-        <img class="home_banner-img" src="../assets/homebanner/BANNER02.png" style="width:100%">
-      </swiper-slide> 
+    <swiper class="swiper m-5 mb-20" :options="swiperOption"> 
       <swiper-slide>
         <img class="home_banner-img" src="../assets/homebanner/BANNER03.png" style="width:100%">
+      </swiper-slide> 
+      <!-- <swiper-slide>
+        <img class="home_banner-img" src="../assets/homebanner/male.jpeg" style="width:100%">
+      </swiper-slide>  -->
+      <swiper-slide>
+        <img class="home_banner-img" src="../assets/homebanner/BANNER01.png" style="width:100%">
       </swiper-slide> 
       <!-- <div class="swiper-pagination" slot="pagination"></div>  -->
       <!-- <div class="swiper-button-prev" slot="button-prev"></div> 
@@ -108,6 +108,19 @@ export default {
       youtubeThumbnails: "",
       genres: [],
       recommendations: [],
+      swiperOption: {
+        slidesPerView: 1,
+        spaceBetween: 2,
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+      }
     }
   },
   props: {
