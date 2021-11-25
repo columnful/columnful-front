@@ -3,7 +3,7 @@
     <!-- @click="$refs.modalName.openModal() -->
     <modal ref="modalName" :backdrop_path="selectedMovie.backdrop_path">
       <template v-slot:header>
-        <h1>DETAILS</h1>
+        <h1 class="modalheader__title">{{selectedMovie.original_title}}</h1>
       </template>
 
       <template v-slot:body>
@@ -11,6 +11,7 @@
       <div>
         <MovieModal 
         :selectedMovieID="selectedmovie_id"
+        :title="selectedMovie.title"
         :backdrop_path="selectedMovie.backdrop_path"
         :genres="selectedMovie.genres"
         :original_title="selectedMovie.original_title"
@@ -81,6 +82,8 @@ import Modal from '@/components/Modal'
 
 import axios from 'axios'
 
+const YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search'
+const YOUTUBE_API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
 const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
 
 export default {
@@ -181,7 +184,6 @@ export default {
   methods: {
     selectedMovieDetail(movie_id) {
       this.selectedmovie_id = movie_id
-      this.showDetail=true
       console.log(this.selectedmovie_id)
       axios.get('https://api.themoviedb.org/3/movie/' + movie_id, {
         params: {
@@ -192,24 +194,55 @@ export default {
       })
       .then((res) =>{
         this.selectedMovie = res.data
-        console.log(res.data)
-        this.showDetail=true
+        console.log(this.selectedMovie.original_title)
+        const query = this.selectedMovie.original_title + ' trailer'
+        console.log(this.query)
+        axios.get(YOUTUBE_API_URL, {
+          params: {
+            key: YOUTUBE_API_KEY,
+            part: 'snippet',
+            type: 'video',
+            q: query,
+            maxResults: 1,
+          }
+        })
+        .then((res) => {
+          console.log(this.res)
+          this.youtubeURL = `https://www.youtube.com/embed/${res.data.items[0].id.videoId}`
+        })
+        .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
 
-      axios.get('https://api.themoviedb.org/3/movie/'+ movie_id +'/videos', {
-      params: {
-        api_key: TMDB_API_KEY,
-        language: "ko-KR"
-      }
-    })
-    .then((res) => {
-      this.videos = res.data.results
-      console.log(this.videos)
-      this.youtubeURL = `https://www.youtube.com/embed/${this.videos[0].key}`
-      console.log(this.youtubeURL)
-    })
-    .catch(err => console.log(err))
+      // const query = this.selectedMovie.original_title + ' trailer'
+      // console.log(this.query)
+      // axios.get(YOUTUBE_API_URL, {
+      //   params: {
+      //     key: YOUTUBE_API_KEY,
+      //     part: 'snippet',
+      //     type: 'video',
+      //     q: query,
+      //     maxResults: 1,
+      //   }
+      // })
+      // .then((res) => {
+      //   console.log(this.res)
+      //   this.youtubeURL = `https://www.youtube.com/embed/${res.data.items[0].id.videoId}`
+      // })
+      // .catch(err => console.log(err))
+    //   axios.get('https://api.themoviedb.org/3/movie/'+ movie_id +'/videos', {
+    //   params: {
+    //     api_key: TMDB_API_KEY,
+    //     // language: "ko-KR"
+    //   }
+    // })
+    // .then((res) => {
+    //   this.videos = res.data.results
+    //   console.log(this.videos)
+    //   this.youtubeURL = `https://www.youtube.com/embed/${this.videos[0].key}`
+    //   console.log(this.youtubeURL)
+    // })
+    // .catch(err => console.log(err))
       }
   }
   // methods: {
@@ -236,5 +269,8 @@ export default {
     /* float: left; */
     font: bold;
     text-align: left;
+  }
+  .modalheader__title {
+    color: whitesmoke;
   }
 </style>
