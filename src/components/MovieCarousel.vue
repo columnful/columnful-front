@@ -9,13 +9,11 @@
         :paginationEnabled="false"
         :perPageCustom="[[0, 1],[650,2],[1020,3],[1340,4],[1660,5],[2000,6],[2350,7],[2800, 8]]">
 
-        <!-- <button class="btn btn--primary mx-auto" @click="$refs.modalName.openModal()">Open modal</button> -->
         <slide
           class="mt-3"
           v-for="movie in movies"
           :key="movie.id"> 
 
-          <!-- modal 연결 방법 다시 생각하기 -->
           <div @click="[selectMovie(movie.id), showMovieModal()]">
             <template v-if="movie.poster_path.slice(0,4) == 'http'">
               <img width="100%" class="movie__poster" :src="movie.poster_path" alt="">
@@ -35,8 +33,6 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel"
-// import axios from "axios"
-
 
 const URL_PREFIX = 'https://image.tmdb.org/t/p/w500'
 

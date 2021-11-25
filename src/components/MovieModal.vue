@@ -1,12 +1,5 @@
 <template>
   <div>
-    <!-- <div class="you_thumbnail"
-      :style="{'background-image': 'url(' + youtubeThumbnails+ ')'}">
-    </div> -->
-<!--     
-    <img
-      class="youtube_trailer_thumbnail"
-      :src="youtubeThumbnails" alt=""> -->
     <div class="moviedetail__top d-flex pt-10">
 
     <div class="youtube_frame d-flex p-10 ml-10">
@@ -22,7 +15,11 @@
     </div>
 
     <div class="moviedetail__content p-10 mr-10 ">
-      <p class="detail__title pb-3 text-left"> {{ title }} </p>
+      <p class="release text-left ml-1"> {{ release_date }} </p>
+      <p class="detail__title text-left"> {{ title }} </p>
+      <div class="detail__release d-flex">
+        <!-- <p class="runtime"> {{ runtime }} mins</p> -->
+      </div>
 
       <div class="genres_group d-flex pb-4">
         <div 
@@ -37,11 +34,19 @@
         </div>
       </div>
       <div class="detail__overview text-left"> {{ overview }} </div>
+      <div class="datail__buttons d-flex pt-5">
+        <img src="../assets/icon/movie/TRAILER.png">
+        <img class="button_like mr-4" src="../assets/icon/movie/LIKE_BTN2.png">
+        <router-link to="/reviews/create/">
+          <img class="button_write mr-2" src="../assets/icon/movie/WRITE.png">
+        </router-link>
+        
+      </div>
     </div>
     </div>
 
-    <div class="deatail__recommendation">
-      <p class="detail__recommendation-text">MORE LIKE THIS</p>
+    <div class="deatail__recommendation p-10 ml-10 mt-10">
+      <p class="detail__recommendation-text text-left">MORE LIKE THIS</p>
     </div>
   </div>
 </template>
@@ -62,6 +67,7 @@ export default {
     youtubeURL: [],
     title: [],
     youtubeThumbnails: [],
+    recommendations: [],
   },
 
 }
@@ -101,5 +107,17 @@ export default {
   }
   .detail__overview {
     color: rgb(222, 222, 222);
+  }
+  .detail__recommendation-text {
+    color: rgb(194, 194, 194);
+    font-weight: bold;
+    font-size: 22px;
+    font-family: Montserrat, sans-serif;
+  }
+  .detail__release {
+    color: rgb(194, 194, 194);
+  }
+  .release {
+    color: rgb(194, 194, 194);
   }
 </style>

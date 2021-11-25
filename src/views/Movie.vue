@@ -19,6 +19,7 @@
         :vote_average="selectedMovie.vote_average"
         :youtubeURL="youtubeURL"
         :youtubeThumbnails="youtubeThumbnails"
+        :recommendations="recommendations"
          />
       </template>
 
@@ -32,7 +33,7 @@
       paginationColor="#999"
       :paginationPadding=3>
       <slide class="slide_item">
-        <img class="banner_img" src="../assets/images/banner/about_time_cropped.jpg" style="width:100%">
+        <img class="banner_img" src="../assets/images/banner/about_time_cropped 2.jpg" style="width:100%">
       </slide>
     </carousel>
     <br><br>
@@ -99,6 +100,7 @@ export default {
       youtubeURL: "",
       youtubeThumbnails: "",
       genres: [],
+      recommendations: [],
     }
   },
   props: {
@@ -221,6 +223,17 @@ export default {
       })
       .then((res) =>{
         this.genres = res.data.genres
+      })
+      .catch(err => console.log(err))
+
+      axios.get('https://api.themoviedb.org/3/movie/' + movie_id +'/recommendations', {
+        params: {
+          api_key: TMDB_API_KEY,
+        }
+      })
+      .then((res) =>{
+        this.recommendations = res.data.results
+        console.log(this.recommendations)
       })
       .catch(err => console.log(err))
       // const query = this.selectedMovie.original_title + ' trailer'
