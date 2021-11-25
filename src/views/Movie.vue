@@ -19,6 +19,7 @@
         :vote_average="selectedMovie.vote_average"
         :youtubeURL="youtubeURL"
         :youtubeThumbnails="youtubeThumbnails"
+        :recommendations="recommendations"
          />
       </template>
 
@@ -32,7 +33,7 @@
       paginationColor="#999"
       :paginationPadding=3>
       <slide class="slide_item">
-        <img class="banner_img" src="../assets/images/banner/about_time_cropped.jpg" style="width:100%">
+        <img class="banner_img" src="../assets/images/banner/about_time_cropped 2.jpg" style="width:100%">
       </slide>
     </carousel>
     <br><br>
@@ -99,6 +100,7 @@ export default {
       youtubeURL: "",
       youtubeThumbnails: "",
       genres: [],
+      recommendations: [],
     }
   },
   props: {
@@ -163,22 +165,6 @@ export default {
       // console.log(res.data)
     })
     .catch(err => console.log(err))
-
-    // const token = localStorage.getItem('jwt')
-    // const config = {
-    //   headers: {
-    //     Authorization: `JWT ${token}`
-    //   }
-    // }
-    // 영화추천
-    // axios.get('http://127.0.0.1:8000/movies/recommend_movie_user/', config)
-    //   .then((res) => {
-    //     console.log(res)
-    //     this.recommend_movie_user = res.data
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
   },
   methods: {
     selectedMovieDetail(movie_id) {
@@ -193,9 +179,7 @@ export default {
       })
       .then((res) =>{
         this.selectedMovie = res.data
-        console.log(this.selectedMovie.original_title)
         const query = this.selectedMovie.original_title + ' trailer'
-        console.log(this.query)
         axios.get(YOUTUBE_API_URL, {
           params: {
             key: YOUTUBE_API_KEY,
@@ -223,35 +207,18 @@ export default {
         this.genres = res.data.genres
       })
       .catch(err => console.log(err))
-      // const query = this.selectedMovie.original_title + ' trailer'
-      // console.log(this.query)
-      // axios.get(YOUTUBE_API_URL, {
-      //   params: {
-      //     key: YOUTUBE_API_KEY,
-      //     part: 'snippet',
-      //     type: 'video',
-      //     q: query,
-      //     maxResults: 1,
-      //   }
-      // })
-      // .then((res) => {
-      //   console.log(this.res)
-      //   this.youtubeURL = `https://www.youtube.com/embed/${res.data.items[0].id.videoId}`
-      // })
-      // .catch(err => console.log(err))
-    //   axios.get('https://api.themoviedb.org/3/movie/'+ movie_id +'/videos', {
-    //   params: {
-    //     api_key: TMDB_API_KEY,
-    //     // language: "ko-KR"
-    //   }
-    // })
-    // .then((res) => {
-    //   this.videos = res.data.results
-    //   console.log(this.videos)
-    //   this.youtubeURL = `https://www.youtube.com/embed/${this.videos[0].key}`
-    //   console.log(this.youtubeURL)
-    // })
-    // .catch(err => console.log(err))
+
+      axios.get('https://api.themoviedb.org/3/movie/' + movie_id +'/recommendations', {
+        params: {
+          api_key: TMDB_API_KEY,
+          language: "ko-KR",
+        }
+      })
+      .then((res) =>{
+        this.recommendations = res.data.results
+        console.log(this.recommendations)
+      })
+      .catch(err => console.log(err))
       }
   }
   // methods: {
