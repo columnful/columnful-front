@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="footer__icons d-flex justify-center p-2 mt-40">
-      <img src="../assets/icon/akar-icons_github-fill.png">
-      <img src="../assets/icon/akar-icons_instagram-fill.png">
-      <img src="../assets/icon/dashicons_facebook-alt.png">
-      <img src="../assets/icon/akar-icons_twitter-fill.png">
-      <img src="../assets/icon/akar-icons_pinterest-fill.png">
+      <img class="footer__icon" src="../assets/icon/akar-icons_github-fill.png">
+      <img class="footer__icon" src="../assets/icon/akar-icons_instagram-fill.png">
+      <img class="footer__icon" src="../assets/icon/dashicons_facebook-alt.png">
+      <img class="footer__icon" src="../assets/icon/akar-icons_twitter-fill.png">
+      <img class="footer__icon" src="../assets/icon/akar-icons_pinterest-fill.png">
     </div>
     <hr>
     <div class="footer__content">
@@ -24,7 +24,7 @@ export default {
   .footer_icons {
     justify-content: center;
   }
-  img {
+  .footer__icon {
     margin-left: 10px;
     margin-right:10px;
   }
