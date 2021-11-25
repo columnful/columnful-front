@@ -7,7 +7,7 @@
     <img
       class="youtube_trailer_thumbnail"
       :src="youtubeThumbnails" alt=""> -->
-    <div class="moviedetail__top d-flex">
+    <div class="moviedetail__top d-flex pt-10">
 
     <div class="youtube_frame d-flex p-10 ml-10">
       <iframe 

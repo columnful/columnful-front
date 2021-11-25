@@ -79,7 +79,8 @@ import Modal from '@/components/Modal'
 import axios from 'axios'
 
 const YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search'
-const YOUTUBE_API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
+// const YOUTUBE_API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
+const YOUTUBE_API_KEY = 'AIzaSyBnvny6WLsXZc0r8jDIg6qvl-WkPmsGvn8'
 const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
 
 export default {
