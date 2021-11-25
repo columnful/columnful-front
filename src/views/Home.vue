@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .swiper { 
     /* height: 350px;  */
     width: 96%; 
@@ -69,8 +69,7 @@ export default {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    text-align: center; 
-    font-weight: bold; 
+    text-align: center;  
   } 
 
 </style>

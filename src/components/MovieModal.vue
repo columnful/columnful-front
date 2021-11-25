@@ -47,11 +47,14 @@
 
     <div class="deatail__recommendation p-10 ml-10 mt-10">
       <p class="detail__recommendation-text text-left">MORE LIKE THIS</p>
+      <MovieCard :recommendations="recommendations" />
     </div>
   </div>
 </template>
 
 <script>
+// import MovieCardItem from '@/components/MovieCardItem'
+import MovieCard from '@/components/MovieCard'
 
 export default {
   name: "MovieModal",
@@ -69,6 +72,13 @@ export default {
     youtubeThumbnails: [],
     recommendations: [],
   },
+  components: {
+    // MovieCardItem,
+    MovieCard
+  },
+  created: function(selectedMovieID) {
+    console.log(selectedMovieID)
+  }
 
 }
 
@@ -93,7 +103,6 @@ export default {
     padding-top: 0.1em; 
     padding-bottom: 0.1rem;
     color: rgb(222, 222, 222);
-
   }
   .moviedetail__top {
     align-items: center;

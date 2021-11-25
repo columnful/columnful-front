@@ -195,9 +195,7 @@ export default {
       })
       .then((res) =>{
         this.selectedMovie = res.data
-        console.log(this.selectedMovie.original_title)
         const query = this.selectedMovie.original_title + ' trailer'
-        console.log(this.query)
         axios.get(YOUTUBE_API_URL, {
           params: {
             key: YOUTUBE_API_KEY,
@@ -229,6 +227,7 @@ export default {
       axios.get('https://api.themoviedb.org/3/movie/' + movie_id +'/recommendations', {
         params: {
           api_key: TMDB_API_KEY,
+          language: "ko-KR",
         }
       })
       .then((res) =>{
@@ -236,35 +235,6 @@ export default {
         console.log(this.recommendations)
       })
       .catch(err => console.log(err))
-      // const query = this.selectedMovie.original_title + ' trailer'
-      // console.log(this.query)
-      // axios.get(YOUTUBE_API_URL, {
-      //   params: {
-      //     key: YOUTUBE_API_KEY,
-      //     part: 'snippet',
-      //     type: 'video',
-      //     q: query,
-      //     maxResults: 1,
-      //   }
-      // })
-      // .then((res) => {
-      //   console.log(this.res)
-      //   this.youtubeURL = `https://www.youtube.com/embed/${res.data.items[0].id.videoId}`
-      // })
-      // .catch(err => console.log(err))
-    //   axios.get('https://api.themoviedb.org/3/movie/'+ movie_id +'/videos', {
-    //   params: {
-    //     api_key: TMDB_API_KEY,
-    //     // language: "ko-KR"
-    //   }
-    // })
-    // .then((res) => {
-    //   this.videos = res.data.results
-    //   console.log(this.videos)
-    //   this.youtubeURL = `https://www.youtube.com/embed/${this.videos[0].key}`
-    //   console.log(this.youtubeURL)
-    // })
-    // .catch(err => console.log(err))
       }
   }
   // methods: {
