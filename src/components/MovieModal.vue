@@ -107,10 +107,6 @@ export default {
 
   .youtube_frame {
     padding: 20;
-    /* position: relative; */
-    /* height: 500px;
-    width: 40%; */
-    /* padding-top: 56.25% */
   }
   .detail__title {
     color: rgb(222, 222, 222);

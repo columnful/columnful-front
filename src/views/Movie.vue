@@ -28,35 +28,41 @@
     </modal>
 
 
-    <carousel :per-page="1" class="banner_list"
-      paginationActiveColor="#e01a31"
-      paginationColor="#999"
-      :paginationPadding=3>
-      <slide class="slide_item">
-        <img class="banner_img" src="../assets/images/banner/about_time_cropped 2.jpg" style="width:100%">
-      </slide>
-    </carousel>
-    <br><br>
+    <swiper class="swiper" :options="swiperOption"> 
+      <swiper-slide>
+        <img class="home_banner-img" src="../assets/homebanner/BANNER01.png" style="width:100%">
+      </swiper-slide> 
+      <swiper-slide>
+        <img class="home_banner-img" src="../assets/homebanner/BANNER02.png" style="width:100%">
+      </swiper-slide> 
+      <swiper-slide>
+        <img class="home_banner-img" src="../assets/homebanner/BANNER03.png" style="width:100%">
+      </swiper-slide> 
+      <!-- <div class="swiper-pagination" slot="pagination"></div>  -->
+      <!-- <div class="swiper-button-prev" slot="button-prev"></div> 
+      <div class="swiper-button-next" slot="button-next"></div>  -->
+    </swiper>
+    
       
     <div id="movies__carousel">
-      <!-- <router-link to="/movie/index">LOAD MORE</router-link> -->
+      
       <MovieCarousel
         :movies="popular_movies"
         group_title="POPULAR"
-        class="mt-5"
+        class="mt-5 mb-20"
         @selectedMovie="selectedMovieDetail"
         @showMovieModal="$refs.modalName.openModal()"
       />
-      <br><br>
+
 
       <MovieCarousel
         :movies="toprated_movies"
         group_title="TOP RATED"
-        class="mt-5"
+        class="mt-5 mb-20"
         @selectedMovie="selectedMovieDetail"
         @showMovieModal="$refs.modalName.openModal()"
       />
-      <br><br>
+
 
       <MovieCarousel
         :movies="nowplaying_movies"
@@ -72,16 +78,17 @@
 
 <script>
 require('dotenv').config()
-import { Carousel, Slide } from "vue-carousel"
 import MovieCarousel from '@/components/MovieCarousel'
 import MovieModal from '@/components/MovieModal'
 import Modal from '@/components/Modal'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.min.css'
 
 import axios from 'axios'
 
 const YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search'
-// const YOUTUBE_API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
-const YOUTUBE_API_KEY = 'AIzaSyBnvny6WLsXZc0r8jDIg6qvl-WkPmsGvn8'
+const YOUTUBE_API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
+// const YOUTUBE_API_KEY = 'AIzaSyBnvny6WLsXZc0r8jDIg6qvl-WkPmsGvn8'
 const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
 
 export default {
@@ -110,10 +117,10 @@ export default {
   },
   components: {
     MovieCarousel,
-    Carousel,
-    Slide,
     MovieModal,
     Modal,
+    swiper,
+    swiperSlide,
   },
   created: function () {
     axios.get('https://api.themoviedb.org/3/movie/popular', {
@@ -190,8 +197,6 @@ export default {
           }
         })
         .then((res) => {
-          this.youtubeThumbnails = res.data.items[0].snippet.thumbnails.high.url
-          console.log(res.data.items[0].snippet.thumbnails.high.url)
           this.youtubeURL = `https://www.youtube.com/embed/${res.data.items[0].id.videoId}`
         })
         .catch(err => console.log(err))
@@ -219,21 +224,8 @@ export default {
         console.log(this.recommendations)
       })
       .catch(err => console.log(err))
-      }
+    }
   }
-  // methods: {
-  //   newAlert: function () {
-  //     if (this.isLogin === false) {
-  //     this.$fire({
-  //       title: "로그인을 해주세요!",
-  //       text: "",
-  //       type: "error",
-  //     }).then(r => {
-  //       console.log(r.value);
-  //     });
-  //     }
-  //   },
-  // }
 }
 </script>
 
