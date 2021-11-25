@@ -17,7 +17,7 @@
     </div>
     <hr>
     <div>
-      <my-review-list :reviews-movie-title="reviewsMovieTitle" :reviews="reviews">
+      <my-review-list :reviews-movie-title="reviewsMovieTitle" :reviews="reviews" :reviews-movie-poster="reviewsMoviePoster">
       </my-review-list>
     </div>
     <hr>
@@ -51,6 +51,7 @@ export default {
       profileUsername: '',
       reviewsMovieTitle: [],
       reviews: [],
+      reviewsMoviePoster: [],
     }
   },
 
@@ -111,16 +112,20 @@ export default {
 
           
         })
-        // .then((res) => {
-        //   console.log(res)
-        //   this.reviewsMovieTitle.forEach((movie_title) => {
-        //     axios.get(`http://127.0.0.1:8000/movies/movie_poster/${movie_title}/`, config)
-        //       .then((res) => {
-        //         console.log(res.data)
-        //       })
+        .then((res) => {
+          console.log(res)
+          this.reviewsMovieTitle.forEach((movie_title) => {
+            axios.get(`http://127.0.0.1:8000/movies/movie_poster/${movie_title}/`, config)
+              .then((res) => {
+                console.log(res.data)
+                res.data.forEach((review) => {
+                  this.reviewsMoviePoster.push(review.poster_path)
+                })
+                console.log(this.reviewsMoviePoster)
+              })
 
-        //   })
-        // })
+          })
+        })
 
         .catch(err => {
           console.log(err)

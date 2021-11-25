@@ -202,7 +202,7 @@ export default {
 
   ul {
     background-color: #fffdfa;
-    border: 5px solid #888888;
+    border: 2px solid #888888;
     list-style-type: none;
     margin: 1em auto;
     padding: 0;
