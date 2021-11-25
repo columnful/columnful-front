@@ -28,19 +28,19 @@
             <label for="movie-title">Movie_Title</label>
             <i class="fas fa-search">
               <input class="form-control movie-title" id="movie-title" v-model.trim="movieInput" @input="submitAutoComplete" type="text" style="margin-bottom : 15px;" />
+              <div class="autocomplete disabled">
+                  <!-- @click="searchSkillAdd" -->
+                <div
+                  style="cursor: pointer"
+                  v-for="(res,i) in result"
+                  :key="i"
+                  v-on:click="changeValue(res)"
+                  v-on:keyup.enter="selectValue('enter', res)"
+                >{{ res }}</div>
+              </div>
             </i>
           </li>
         </ul>
-        <div class="autocomplete disabled">
-            <!-- @click="searchSkillAdd" -->
-          <div
-            style="cursor: pointer"
-            v-for="(res,i) in result"
-            :key="i"
-            v-on:click="changeValue(res)"
-            v-on:keyup.enter="selectValue('enter', res)"
-          >{{ res }}</div>
-        </div>
       </div>
       <!--  -->
       <div class="form-group">
@@ -60,8 +60,6 @@
 <script>
 import axios from'axios'
 // import skills from "../../skills.js";
-
-
 export default {
   name: 'CreateReview',
   data: function () {
@@ -119,6 +117,7 @@ export default {
       const autocomplete = document.querySelector(".autocomplete");
       if (this.movieInput) {
         autocomplete.classList.remove("disabled");
+        autocomplete.style.display = 'block';
         this.result = this.$store.state.movies_title.filter((movie) => {
           return movie.match(new RegExp("^" + this.movieInput, "i"));
         });
@@ -138,7 +137,6 @@ export default {
       this.movieInput = str;
       console.log(autocomplete)
       autocomplete.style.display = 'none';
-
     },
     selectValue(keycode, str) {
       console.log(keycode, str)
@@ -198,18 +196,15 @@ export default {
     font-size: 70%;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-
     position: absolute;
     top: 10px;
     left: 10px;
-
     /* input:focus+& {
       color: darken(#0074D9, 10);
       font-weight: bold;
       letter-spacing: -0.01em;
     } */
-    }
-
+  }
   input, textarea {
     background-color: transparent;
     border: none;
@@ -220,14 +215,12 @@ export default {
     padding: 2em 10px 10px 10px;
     outline: none;
     width: 100%;
-
       /* &:focus {
         color: #000;
         background-color: lighten(#888888, 40);
         box-shadow: 0px 3px 4px -2px rgba(0,0,115,0.25) inset;
       } */
   }
-
   ul {
     background-color: #fffdfa;
     border: 5px solid #888888;

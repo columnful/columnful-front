@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>reviews</h1>
+    <!-- <h2  style="color: black">reviews</h2> -->
     <div
         style="background: rgba(0, 0, 0, 0.7 ); color: white;"
         striped
@@ -75,6 +75,15 @@ export default {
           console.log(err)
         })
     },
+
+    getReviewsMoviePoster: function () {
+      const config = this.setToken()
+      axios.get(`http://127.0.0.1:8000/reviews/create`, config)
+        .then((res) => {
+          console.log(res)
+        })
+    }
+
   },
    /* 
   login 해야만 review 게시판을 접근할 수 있는 기능을 주석 처리한 이유
@@ -150,7 +159,8 @@ li {
 
 #btn {
   /* 합쳐서 800 */
-  padding-right: 20px;
+  background-color: whitesmoke;
+  padding-right: 5px;
   width: 780px;
   /* margin-left: 700px; */
   text-align: right;
