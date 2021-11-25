@@ -11,11 +11,13 @@
       <hr>
       <ul>
         <li>
-          <p style="white-space: pre-line; text-align: left; margin-left: 10px; font-size: 18px;">{{ review.content }}</p>
+          <p style="white-space: pre-line; text-align: left; margin-left: 10px; font-size: 18px; padding-top: 20px; padding-bottom: 40px; line-height: 2;">
+            {{ review.content }}
+          </p>
         </li>
       </ul>
-      <div v-if="review.username === this.username">
-        <button class="w3-bar-item w3-button tablink" @click="updateReview">글 수정</button>
+      <div v-if="review.username === this.username" style="text-align: right; width: 800px">
+        <button class="w3-bar-item w3-button tablink" @click="updateReview">글 수정  </button>
         <button on id="delete-review" class="w3-bar-item w3-button tablink" @click="deleteReview"><i class="fa fa-plane w3-margin-right"></i>글 삭제</button>
       </div>
     </body>
@@ -211,7 +213,7 @@ export default {
 
   ul {
     background-color: #fffdfa;
-    border: 5px solid #888888;
+    border: 2px solid #888888;
     list-style-type: none;
     margin: 1em auto;
     padding: 0;

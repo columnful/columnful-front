@@ -72,6 +72,7 @@ export default {
       result: null,
       isActive: false,
       searchQuery: '',
+      posterPath: '',
       // names: names,
       // 
     }
@@ -88,26 +89,35 @@ export default {
     },
     createReview: function () {
       const config = this.setToken()
-      const ReviewItem = {
-        content: this.content,
-        title: this.title,
-        movie_title: this.movieInput,
-      }
       const isExist = this.$store.state.movies_title.includes(this.movieInput)
+      
       if (isExist) {
-        console.log(ReviewItem)
-        if (ReviewItem.title) {
-          axios.post(`http://127.0.0.1:8000/reviews/reviews/`, ReviewItem, config)
-            .then((res) => {
-              console.log(res)
-              this.$router.push({ name: 'Reviews' })
-              this.title = ''
-            })
-            .catch((err) => {
-              console.log(err)
-            })
-            // this.content = null,
-        }
+        axios.get(`http://127.0.0.1:8000/movies/movie_poster/${this.movieInput}/`, config)
+          .then((res) => {
+            this.posterPath = res.data[0].poster_path
+            console.log(this.posterPath)
+            const ReviewItem = {
+              content: this.content,
+              title: this.title,
+              movie_title: this.movieInput,
+              poster_path: this.posterPath,
+            }
+            console.log(ReviewItem)
+            if (ReviewItem.title) {
+              axios.post(`http://127.0.0.1:8000/reviews/reviews/`, ReviewItem, config)
+                .then((res) => {
+                  console.log(res)
+                  this.$router.push({ name: 'Reviews' })
+                  this.title = ''
+                })
+                .catch((err) => {
+                  console.log(err)
+                })
+            
+                // this.content = null,
+            }
+          })
+
       } else {
         console.log('영화를 선택하세요')
       }
