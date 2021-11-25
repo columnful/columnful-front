@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>This is profile</h1>
-    <div>
+    <!-- <h1>This is profile</h1> -->
+    <div style="margin-top: 30px;">
       <user-profile v-bind:userData="UserData">
       </user-profile>
       <div v-if="profileUsername != this.$store.state.username">
@@ -10,12 +10,12 @@
         <button v-else @click="followUser"> 팔로우하기 </button>
       </div>
     </div>
-    <hr>
+    <!-- <hr>
     <div>
       <like-genre>
       </like-genre>
     </div>
-    <hr>
+    <hr> -->
     <div>
       <my-review-list :reviews-movie-title="reviewsMovieTitle" :reviews="reviews" :reviews-movie-poster="reviewsMoviePoster">
       </my-review-list>
@@ -31,7 +31,7 @@
 <script>
 import axios from 'axios'
 import UserProfile from '@/components/UserProfile'
-import LikeGenre from '@/components/LikeGenre'
+// import LikeGenre from '@/components/LikeGenre'
 import MyReviewList from '@/components/MyReviewList'
 import LikeMovieList from '@/components/LikeMovieList'
 
@@ -39,7 +39,7 @@ export default {
   name: 'Profile',
   components: {
     UserProfile,
-    LikeGenre,
+    // LikeGenre,
     MyReviewList,
     LikeMovieList,
   },
