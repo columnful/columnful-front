@@ -1,18 +1,16 @@
 <template>   
   <div class="login">
-    
-    <!-- <div class="d-flex justify-content-between align-items-stretch mb-2" style="width: 100%;">
-      <h5 class="mb-0">회원가입</h5>
-    </div> -->
-    
-    <form class="justify-content-center mt-10" @submit.prevent="signup">
+    <div v-if="signupCompleted"> Completed! </div>
+    <div v-else>
+      <form class="justify-content-center mt-10" @submit.prevent="signup">
+        
+        <input class="form-control mb-4 mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="USERNAME" type="text" id="username" v-model="credentials.username">
+        <input class="form-control mb-2 mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="PASSWORD" type="password" id="password" v-model="credentials.password">
+        <input class="form-control mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="CONFIRM PASSWORD" type="password" id="passwordConfirm" v-model="credentials.passwordConfirm" @keypress.enter="signup">
+        <button @click="signup" type="button" class="btn btn-danger mt-3" style="width: 100%;">SIGN UP</button>
       
-      <input class="form-control mb-4 mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="USERNAME" type="text" id="username" v-model="credentials.username">
-      <input class="form-control mb-2 mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="PASSWORD" type="password" id="password" v-model="credentials.password">
-      <input class="form-control mr-sm-2" style="width: 100%; height: 45px; padding: 10px;" placeholder="CONFIRM PASSWORD" type="password" id="passwordConfirm" v-model="credentials.passwordConfirm" @keypress.enter="signup">
-      <button @click="signup" type="button" class="btn btn-danger mt-3" style="width: 100%;">SIGN UP</button>
-    
-    </form>
+      </form>
+    </div>
   
   </div>
 </template>
@@ -30,13 +28,16 @@ export default {
         passwordConfirm: '',
       },
       error: false,
+      signupCompleted: false,
     }
   },
   methods: {
     signup: function () {
       axios.post('http://127.0.0.1:8000/accounts/signup/', this.credentials,)
         .then(() => {
-          this.$router.push({ name: 'Login' })
+          // this.$router.push({ name: 'Home' })
+          this.signupCompleted=true
+          // showLogin=true
         })
         .catch(err => {
           console.log(err)
