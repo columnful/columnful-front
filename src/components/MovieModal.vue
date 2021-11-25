@@ -35,7 +35,7 @@
       </div>
       <div class="detail__overview text-left"> {{ overview }} </div>
       <div class="datail__buttons d-flex pt-5">
-        <img src="../assets/icon/movie/TRAILER.png">
+        <img class="mr-4" src="../assets/icon/movie/TRAILER.png">
         <img class="button_like mr-4" src="../assets/icon/movie/LIKE_BTN2.png">
         <router-link to="/reviews/create/">
           <img class="button_write mr-2" src="../assets/icon/movie/WRITE.png">
@@ -47,8 +47,8 @@
 
     <div class="deatail__recommendation p-10 ml-10 mt-10">
       <p class="detail__recommendation-text text-left mb-4">MORE LIKE THIS</p>
-      <MovieCard :recommendations="recommendations" />
-      <br>
+      <MovieCard class="mb-20" :recommendations="recommendations" />
+      
       <MovieCard :recommendations="similars" />
     </div>
   </div>

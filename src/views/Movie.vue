@@ -229,7 +229,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .banner_img {
     opacity: 0.77;
   }
@@ -241,4 +241,15 @@ export default {
   .modalheader__title {
     color: whitesmoke;
   }
+  .swiper { 
+    /* height: 350px;  */
+    width: 96%; 
+  }
+    
+  .swiper-slide { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;  
+  } 
 </style>
