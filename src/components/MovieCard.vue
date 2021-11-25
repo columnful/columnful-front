@@ -5,9 +5,9 @@
           <MovieCardItem :recommendation="recommendation"/>
         </swiper-slide> 
         <!-- <div class="swiper-pagination" slot="pagination"></div>  -->
-        <div class="swiper-button-prev d-flex" slot="button-prev"> 
-          <span>&lt;</span> PREV</div> 
-        <div class="swiper-button-next d-flex mr-5" slot="button-next">NEXT <span>&gt;</span></div> 
+        <div class="swiper-button-prev" slot="button-prev"> 
+          <span>&lt;</span></div> 
+        <div class="swiper-button-next" slot="button-next"> <span>&gt;</span></div> 
       </swiper>
   </div>
 </template>
@@ -21,6 +21,7 @@ export default {
   name: "MovieCard",
   props: {
     recommendations: [],
+    similars: [],
   },
   components:{
     swiper,

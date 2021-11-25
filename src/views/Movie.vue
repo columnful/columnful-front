@@ -165,22 +165,6 @@ export default {
       // console.log(res.data)
     })
     .catch(err => console.log(err))
-
-    // const token = localStorage.getItem('jwt')
-    // const config = {
-    //   headers: {
-    //     Authorization: `JWT ${token}`
-    //   }
-    // }
-    // 영화추천
-    // axios.get('http://127.0.0.1:8000/movies/recommend_movie_user/', config)
-    //   .then((res) => {
-    //     console.log(res)
-    //     this.recommend_movie_user = res.data
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
   },
   methods: {
     selectedMovieDetail(movie_id) {

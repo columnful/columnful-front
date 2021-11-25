@@ -46,15 +46,19 @@
     </div>
 
     <div class="deatail__recommendation p-10 ml-10 mt-10">
-      <p class="detail__recommendation-text text-left">MORE LIKE THIS</p>
+      <p class="detail__recommendation-text text-left mb-4">MORE LIKE THIS</p>
       <MovieCard :recommendations="recommendations" />
+      <br>
+      <MovieCard :recommendations="similars" />
     </div>
   </div>
 </template>
 
 <script>
-// import MovieCardItem from '@/components/MovieCardItem'
 import MovieCard from '@/components/MovieCard'
+import axios from 'axios'
+
+const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
 
 export default {
   name: "MovieModal",
@@ -72,12 +76,27 @@ export default {
     youtubeThumbnails: [],
     recommendations: [],
   },
+  data () {
+    return {
+      similars: [],
+    }
+  },
   components: {
     // MovieCardItem,
     MovieCard
   },
-  created: function(selectedMovieID) {
-    console.log(selectedMovieID)
+  created: function() {
+    axios.get('https://api.themoviedb.org/3/movie/' + this.selectedMovieID + '/similar', {
+        params: {
+          api_key: TMDB_API_KEY,
+          language: "ko-KR"
+        }
+      })
+      .then((res) =>{
+        this.similars = res.data.results
+        console.log(this.similars)
+      })
+      .catch(err => console.log(err))
   }
 
 }

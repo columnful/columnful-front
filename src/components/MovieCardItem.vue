@@ -16,7 +16,25 @@
                     <div class="detail__genre-badge text-xs px-3 rounded-full">{{genre.name}}</div>
                   </div>
                 </div>
-                <p class="reco_title text-left mx-4 mb-2"> {{ recommendation.title }} </p>
+                <p class="reco_title text-left mx-4"> {{ recommendation.title }} </p>
+                <div class="ml-3">
+                  <div class="d-flex">
+                    <div 
+                      class="keywords p-1"
+                      v-for="(keyword, idx) in keywords"
+                      :key="idx">
+                        <div v-if="idx<2">#{{keyword.name}}</div>
+                    </div>
+                  </div>
+                  <div class="d-flex">
+                    <div 
+                      class="keywords"
+                      v-for="(keyword, idx) in keywords"
+                      :key="idx">
+                        <div class="px-1 mb-2" v-if="1<idx & idx<5">#{{keyword.name}}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 						<!-- <button slot="button" class="btn btn-primary" @click="onClick">Click me</button> -->
@@ -29,17 +47,22 @@
 
 <script>
 import axios from 'axios'
+import Card from '@/components/Card'
 
 const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
 
 export default {
   name: "MovieCardItem",
+  components: {
+    Card,
+  },
   props:{
     recommendation: [],
   },
   data() {
     return {
-      genres: []
+      genres: [],
+      keywords: [],
     }
   },
   created: function () {
@@ -50,7 +73,18 @@ export default {
       })
       .then((res) =>{
         this.genres = res.data.genres
-        console.log(this.genres)
+        // console.log(this.genres)
+      })
+      .catch(err => console.log(err))
+
+      axios.get('https://api.themoviedb.org/3/movie/' + this.recommendation.id + '/keywords', {
+        params: {
+          api_key: TMDB_API_KEY,
+        }
+      })
+      .then((res) =>{
+        this.keywords = res.data.keywords
+        console.log(this.keywords)
       })
       .catch(err => console.log(err))
   },
