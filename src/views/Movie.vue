@@ -7,23 +7,19 @@
       </template>
 
       <template v-slot:body>
-   
-      <div>
         <MovieModal 
         :selectedMovieID="selectedmovie_id"
         :title="selectedMovie.title"
         :backdrop_path="selectedMovie.backdrop_path"
-        :genres="selectedMovie.genres"
+        :genres="genres"
         :original_title="selectedMovie.original_title"
         :overview="selectedMovie.overview"
         :release_date="selectedMovie.release_date"
         :runtime="selectedMovie.runtime"
         :vote_average="selectedMovie.vote_average"
         :youtubeURL="youtubeURL"
+        :youtubeThumbnails="youtubeThumbnails"
          />
-        <!-- <p> {{ selectedMovie.original_title }} </p>
-        <br><br><br><br><br><br><br><br><br><br><br><br> -->
-      </div>
       </template>
 
       <template v-slot:footer>
@@ -100,6 +96,8 @@ export default {
       selectedmovie_id: "",
       videos: [],
       youtubeURL: "",
+      youtubeThumbnails: "",
+      genres: [],
     }
   },
   props: {
@@ -207,13 +205,23 @@ export default {
           }
         })
         .then((res) => {
-          console.log(this.res)
+          this.youtubeThumbnails = res.data.items[0].snippet.thumbnails.high.url
+          console.log(res.data.items[0].snippet.thumbnails.high.url)
           this.youtubeURL = `https://www.youtube.com/embed/${res.data.items[0].id.videoId}`
         })
         .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
 
+      axios.get('https://api.themoviedb.org/3/movie/' + movie_id, {
+        params: {
+          api_key: TMDB_API_KEY,
+        }
+      })
+      .then((res) =>{
+        this.genres = res.data.genres
+      })
+      .catch(err => console.log(err))
       // const query = this.selectedMovie.original_title + ' trailer'
       // console.log(this.query)
       // axios.get(YOUTUBE_API_URL, {
