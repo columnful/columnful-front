@@ -3,11 +3,11 @@
     <b>비평 목록</b>
     <br>
     <span
-      v-for="Review in Reviews" 
-      :key="Review.id"
-      :Review="Review"
+      v-for="review in reviews" 
+      :key="review.id"
+      :review="review"
     >
-      <span>{{ Review }} | </span>
+      <router-link :to="{name: 'ReviewDetail', params: { reviewId: review.id }}">{{ review.movie_title }} | </router-link>
     </span>
     <div>
       <my-review-list-item>
@@ -23,19 +23,23 @@ export default {
   name: 'MyReviewList',
   data: function() {
     return{
-      Reviews_movieTitle: [],
+      // Reviews_movieTitle: [],
     }
   },
-  props: ['Reviews'],
+  props: [
+    'reviews',
+    'reviewsMovieTitle',
+    ],
   components: {
     MyReviewListItem
   },
   created: function() {
-    console.log(this.Reviews)
-    console.log(this.Reviews_movieTitle)
+    // console.log(this.reviews)
+    // console.log(this.Reviews_movieTitle)
+    // console.log(this.reviewsMovieTitle)
   },
   updated: function() {
-    this.Reviews_movieTitle = this.Reviews
+    // this.Reviews_movieTitle = this.reviewsMovieTitle
     // console.log(this.Reviews_movieTitle)
   }
 }

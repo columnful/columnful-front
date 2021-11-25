@@ -17,7 +17,7 @@
     </div>
     <hr>
     <div>
-      <my-review-list v-bind:reviews="Reviews">
+      <my-review-list :reviews-movie-title="reviewsMovieTitle" :reviews="reviews">
       </my-review-list>
     </div>
     <hr>
@@ -49,7 +49,8 @@ export default {
       UserData: '',
       Follow: '',
       profileUsername: '',
-      Reviews: [],
+      reviewsMovieTitle: [],
+      reviews: [],
     }
   },
 
@@ -69,7 +70,7 @@ export default {
       axios.get(`http://127.0.0.1:8000/accounts/profile/${this.profileUsername}/`, config)
         .then((res) => {
           this.UserData = res.data
-          console.log(res.data)
+          // console.log(res.data)
         })
         .catch(err => {
           console.log(err)
@@ -100,24 +101,26 @@ export default {
       const config = this.setToken()
       axios.get(`http://127.0.0.1:8000/reviews/reviews/get/${this.profileUsername}/`, config)
         .then((res) => {
-          // console.log(res.data)
-          // console.log(this.Reviews)
-          res.data.forEach((review) => {
-            this.Reviews.push(review.movie_title)
-            // console.log(this.Reviews)
+          console.log(res.data)
+          this.reviews = res.data
+          // console.log(this.reviews)
+          this.reviews.forEach((review) => {
+            this.reviewsMovieTitle.push(review.movie_title)
           })
+          console.log(this.reviewsMovieTitle)
+
           
         })
-        .then((res) => {
-          console.log(res)
-          this.Reviews.forEach((movie_title) => {
-            axios.get(`http://127.0.0.1:8000/movies/movie_poster/${movie_title}/`, config)
-              .then((res) => {
-                console.log(res.data)
-              })
+        // .then((res) => {
+        //   console.log(res)
+        //   this.reviewsMovieTitle.forEach((movie_title) => {
+        //     axios.get(`http://127.0.0.1:8000/movies/movie_poster/${movie_title}/`, config)
+        //       .then((res) => {
+        //         console.log(res.data)
+        //       })
 
-          })
-        })
+        //   })
+        // })
 
         .catch(err => {
           console.log(err)

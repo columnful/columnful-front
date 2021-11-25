@@ -19,19 +19,19 @@
             <label for="movie-title">Movie_Title</label>
             <i class="fas fa-search">
               <input class="form-control movie-title" id="movie-title" v-model.trim="review.movie_title" @input="submitAutoComplete" type="text" style="margin-bottom : 15px;">
+              <div class="autocomplete disabled">
+                  <!-- @click="searchSkillAdd" -->
+                <div
+                  style="cursor: pointer"
+                  v-for="(res,i) in result"
+                  :key="i"
+                  v-on:click="changeValue(res)"
+                  v-on:keyup.enter="selectValue('enter', res)"
+                >{{ res }}</div>
+              </div>
             </i>
           </li>
         </ul>
-        <div class="autocomplete disabled">
-            <!-- @click="searchSkillAdd" -->
-          <div
-            style="cursor: pointer"
-            v-for="(res,i) in result"
-            :key="i"
-            v-on:click="changeValue(res)"
-            v-on:keyup.enter="selectValue('enter', res)"
-          >{{ res }}</div>
-        </div>
       </div>
       <!--  --> 
       <div class="form-group">
