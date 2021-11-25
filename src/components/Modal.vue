@@ -74,7 +74,7 @@ export default {
     &__dialog {
       position: relative;
       width: 80%;
-      height: 90%;
+      height: 150%;
       background-color: #ffffff;
       border-radius: 5px;
       margin: 50px auto;
